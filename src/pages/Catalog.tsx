@@ -12,9 +12,8 @@ function Catalog() {
         const catalog = (event: { preventDefault: () => any; }) =>
             event.preventDefault();
             Api.getProducts().then((data) =>{
-                setProducts(data.data.products);
+                setProducts(data.data);
             })
-            
     }, [])
 
     return(
