@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-function Home() {
+const Home = () => {
   return (
     <div>
       <p>Home</p>
