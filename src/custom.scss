@@ -4,4 +4,23 @@ $theme-colors: (
     "nav": #ddd3d2
 );
 
+.AppContainer { 
+    background: #832c1b; 
+    min-height: 100vh; 
+}
+
+.ProductGridContainer { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.CardContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    max-height: 400;
+}
+
 @import "~bootstrap/scss/bootstrap";

@@ -13,13 +13,8 @@ const Catalog = () => {
   }, [])
 
   return (
-    <div className='Catalog'>
-      <div className='catalog-header'>
-        <h1>Productos</h1>
-      </div>
-      <div className='catalog-body'>
-        <ProductGrid products={products} />
-      </div>
+    <div>
+      <ProductGrid products={products} />{' '}
     </div>
   )
 }

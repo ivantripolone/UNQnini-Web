@@ -13,12 +13,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
   }
 
   return (
-    <div className='card bg-transparent' data-style='width: 18rem;'>
+    <div className='CardContainer'>
       <img
         onClick={handleClick}
         src={product.pictureUrl}
         className='card-img-top'
-        alt='...'
+        alt={`Producto ${product.name}`}
       />
       <div className='card-body'>
         <h5 className='card-title'>{product.name}</h5>
