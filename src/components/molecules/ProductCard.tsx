@@ -13,7 +13,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   }
 
   return (
-    <div className='card' data-style='width: 18rem;'>
+    <div className='card bg-transparent' data-style='width: 18rem;'>
       <img
         onClick={handleClick}
         src={product.pictureUrl}
