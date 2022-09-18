@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom'
+import Topbar from '../molecules/Topbar'
 
 const Home = () => {
   return (
     <div>
-      <p>Home</p>
+      <Topbar />
       <Outlet />
     </div>
   )
