@@ -1,26 +1,40 @@
 $theme-colors: (
-    "primary": #832c1b,
     "light": #ded4d4,
     "nav": #ddd3d2
 );
+#BotonAgregarAlCarrito {
+    background-color: #ded4d4;
+}
 
 .AppContainer { 
     background: #832c1b; 
-    min-height: 100vh; 
+    min-height: 100vh;
 }
 
 .ProductGridContainer { 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: space-between;
+    gap: 10px 30px;
+    align-content: center;
 }
 
 .CardContainer {
     display: flex;
     flex-direction: column;
     max-width: 200px;
-    max-height: 400;
+    max-height: 340px;
 }
+
+.ProductPageGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    align-content: center;
+    justify-content: center;
+}
+
+
 
 @import "~bootstrap/scss/bootstrap";

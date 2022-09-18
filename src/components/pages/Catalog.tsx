@@ -14,7 +14,7 @@ const Catalog = () => {
 
   return (
     <div>
-      <ProductGrid products={products} />{' '}
+      <ProductGrid products={products} />
     </div>
   )
 }

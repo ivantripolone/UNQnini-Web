@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/esm/Button'
 import { useParams } from 'react-router-dom'
 import productsService from '../../services/productsService'
 import { Product } from '../../types/product'
@@ -22,24 +21,14 @@ const ProductPage = () => {
   }, [])
 
   return (
-    <div>
-      <div className='product-picture'>
-        <img src={product.pictureUrl} />
-      </div>
-      <div>
+    <div className='ProductPageGrid'>
+      <img src={product.pictureUrl} />
+      <div className='container-flex'>
         <h1>{product.name}</h1>
-        <h2>{product.price}</h2>
-      </div>
-      <div>
+        <h2>${product.price}</h2>
         <h3>Cantidad:</h3>
-        <Button variant='success'>Agregar al carrito</Button>
-      </div>
-      <div>
-        <ul>
-          {product.description.map((desc) => (
-            <li>{desc}</li>
-          ))}
-        </ul>
+        <button id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'> Agregar al carrito </button>
+        <ul> {product.description.map((desc) => ( <li>{desc}</li> ))} </ul>
       </div>
     </div>
   )
