@@ -4,7 +4,7 @@ import Home from './components/pages/Home'
 
 const App = () => {
   return (
-    <div className='App' style={{ backgroundColor: `#832c1b` }}>
+    <div className='AppContainer'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />}>
