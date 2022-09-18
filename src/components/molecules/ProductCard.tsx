@@ -9,7 +9,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`/products/${product.id}`)
+    navigate(`/product/${product.id}`)
   }
 
   return (
