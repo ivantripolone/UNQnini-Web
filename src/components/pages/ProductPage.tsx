@@ -35,7 +35,14 @@ const ProductPage = () => {
       <div className='container-flex'>
         <h1>{product.name}</h1>
         <h2>${product.price}</h2>
-        <h3>Cantidad:</h3>
+        <h2>Seleccione una cantidad</h2>
+
+        <select className='form-select mb-3' aria-label='Default select example'>
+          {[...Array(product.stock)].map((_, i) => (
+            <option>{`${i + 1}`}</option>
+          ))}
+        </select>
+
         <button id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'>
           Agregar al carrito
         </button>
