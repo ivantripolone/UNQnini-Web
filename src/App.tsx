@@ -13,6 +13,7 @@ const App = () => {
             <Route index element={<Catalog />} />
             <Route path='/product/:productId' element={<ProductPage />} />
             <Route path='/error/:errorId' element={<ErrorPage />} />
+            <Route path='*' element={<ErrorPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
