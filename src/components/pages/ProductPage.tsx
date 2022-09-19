@@ -16,22 +16,18 @@ const ProductPage = () => {
 
   const navigate = useNavigate()
 
-  const handleError = (status: string) => {
-    navigate(`/error/${status}`, { replace: true })
-  }
-
   useEffect(() => {
     productsService
       .getProduct(productId!)
       .then((product) => {
         setProduct(product)
       })
-      .catch((error) => handleError(error.response.status))
-  }, [])
+      .catch((error) => navigate(`/error/${error.response.status}`, { replace: true }))
+  }, [navigate, productId])
 
   return (
     <div className='ProductPageGrid'>
-      <img src={product.pictureUrl} />
+      <img src={product.pictureUrl} alt={product.name} />
       <div className='container-flex'>
         <h1>{product.name}</h1>
         <h2>${product.price}</h2>
@@ -39,7 +35,7 @@ const ProductPage = () => {
 
         <select className='form-select mb-3' aria-label='Default select example'>
           {[...Array(product.stock)].map((_, i) => (
-            <option>{`${i + 1}`}</option>
+            <option key={i + 1}>{`${i + 1}`}</option>
           ))}
         </select>
 
@@ -48,7 +44,7 @@ const ProductPage = () => {
         </button>
         <ul>
           {product.description.map((desc) => (
-            <li>{desc}</li>
+            <li key={desc}>{desc}</li>
           ))}
         </ul>
       </div>

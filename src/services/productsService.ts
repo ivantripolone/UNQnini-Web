@@ -1,12 +1,11 @@
 import { Product } from '../types/product'
 import genericService from './genericService'
 
-const productService = genericService('/products')
+const service = genericService('/products')
 
-const getProducts = () => productService.get<Product[]>('/')
-const getProduct = (id: string) => productService.get<Product>(`/${id}`)
-
-export default {
-  getProducts,
-  getProduct,
+const productService = {
+  getProducts: () => service.get<Product[]>('/'),
+  getProduct: (id: string) => service.get<Product>(`/${id}`),
 }
+
+export default productService

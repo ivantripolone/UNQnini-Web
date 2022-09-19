@@ -8,18 +8,14 @@ const Catalog = () => {
   const [products, setProducts] = useState<Product[]>([])
   const navigate = useNavigate()
 
-  const handleError = (status: string) => {
-    navigate(`/error/${status}`, { replace: true })
-  }
-
   useEffect(() => {
     productsService
       .getProducts()
       .then((data) => {
         setProducts(data)
       })
-      .catch((error) => handleError(error.response.status))
-  }, [])
+      .catch((error) => navigate(`/error/${error.response.status}`, { replace: true }))
+  }, [navigate])
 
   return (
     <div>
