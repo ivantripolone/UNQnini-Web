@@ -16,23 +16,15 @@ const initialProduct = {
 
 const ProductPage = () => {
   let { productId } = useParams<string>()
-  const [product, setProduct] = useState<Product>(initialProduct)
-  const { CartContext, setCartContext } = useContext(DataContext) as PurchaseDataContextType
   const navigate = useNavigate()
+  const [product, setProduct] = useState<Product>(initialProduct)
   const [quantitySelected, setQuantitySelected]= useState<number>(1)
-
-
+  const { CartContext, setCartContext } = useContext(DataContext) as PurchaseDataContextType
+  
   const saveProductInCart = (quantitySelected : Number, totalToPay: Number) => {
-    
-    const purchaseData = {
-      quantitySelected: quantitySelected,
-      totalToPay: totalToPay
-    }
-
+    const purchaseData = { quantitySelected: quantitySelected, totalToPay: totalToPay }
     setCartContext(CartContext.set(productId!, purchaseData))
-    console.log(CartContext)
   }
-
 
   useEffect(() => {
     productsService.getProduct(productId!).then((product) => { setProduct(product) })
@@ -55,10 +47,9 @@ const ProductPage = () => {
         <button onClick={() => saveProductInCart(quantitySelected, quantitySelected * product.price)} id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'>
           Agregar al carrito
         </button>
+        
         <ul>
-          {product.description.map((desc) => (
-            <li key={desc}>{desc}</li>
-          ))}
+          {product.description.map((desc) => ( <li key={desc}>{desc}</li>))}
         </ul>
       </div>
     </div>
