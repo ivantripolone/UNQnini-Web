@@ -1,32 +1,45 @@
 import { useContext } from 'react'
 import { Table } from 'react-bootstrap'
 import { DataContext } from '../../context/DataContext'
-import { PurchaseData, PurchaseDataContextType } from '../../context/types'
-
-type CartProduct = {
-  id: string
-  quantity: Number
-  subtotal: Number
-}
+import { CartProduct, CartProductContextType } from '../../context/types'
+import Delete_Button from '../../img/Delete_Button.png'
+import Pay_Button from '../../img/Pay_Button.png'
 
 const Cart = () => {
-  const cartContext = (useContext(DataContext) as PurchaseDataContextType).CartContext
+  const { cartContext , setCartContext } = useContext(DataContext) as CartProductContextType
+  
+  const handleDelete = (productId : string) => {
+    cartContext.delete(productId)
+    setCartContext(new Map(cartContext))
+  } 
 
-  var products: CartProduct[] = []
-  var total = 0
-  //Obtener todos los productos del contexto y agregarlos a un Array
-  //A su vez, sumar los subtotales
-  cartContext.forEach((value: PurchaseData, key) => {
-    products.push({
-      id: key,
-      quantity: value.quantitySelected,
-      subtotal: value.totalToPay,
+  const tableValues = () => {
+    const products = new Array()
+    let total = 0
+    
+    cartContext.forEach((value: CartProduct) => { products.push(value); total += value.subtotal as number})
+
+    const tableElements = products.map((product) => {
+      return (
+        <tr id={product.id}>
+          <th>{product.title}</th>
+          <th>{product.quantity.toString()}</th>
+          <th>${product.subtotal.toString()}</th>
+          <th><button onClick={() => handleDelete(product.id)} id='BotonEliminarProducto'><img src={Delete_Button}/></button></th>
+        </tr>
+      )
     })
-    total += value.totalToPay as number
-  })
+
+    const totalToPay = (
+      <tr>
+       <h3>Total: ${total}</h3>
+       <button id='BotonPagarProductos'><img src={Pay_Button}/></button>
+     </tr>)
+
+    return(tableElements.concat([totalToPay]))
+  }
 
   return (
-    <div>
       <div className='ProductTableContainer'>
         <Table borderless>
           <thead>
@@ -37,22 +50,10 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => {
-              return (
-                <tr>
-                  <th>{product.id}</th>
-                  <th>{product.quantity.toString()}</th>
-                  <th>$ {product.subtotal.toString()}.-</th>
-                </tr>
-              )
-            })}
+            {tableValues()}
           </tbody>
         </Table>
       </div>
-      <div className='CartFooter'>
-        <h1>Total: ${total}</h1>
-      </div>
-    </div>
   )
 }
 

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
 import productsService from '../../services/productsService'
 import { Product } from '../../types/product'
-import { PurchaseDataContextType } from '../../context/types'
+import { CartProduct, CartProductContextType } from '../../context/types'
 
 const initialProduct = {
   id: '',
@@ -19,11 +19,11 @@ const ProductPage = () => {
   const navigate = useNavigate()
   const [product, setProduct] = useState<Product>(initialProduct)
   const [quantitySelected, setQuantitySelected]= useState<number>(1)
-  const { CartContext, setCartContext } = useContext(DataContext) as PurchaseDataContextType
+  const { cartContext , setCartContext } = useContext(DataContext) as CartProductContextType
   
-  const saveProductInCart = (quantitySelected : Number, totalToPay: Number) => {
-    const purchaseData = { quantitySelected: quantitySelected, totalToPay: totalToPay }
-    setCartContext(CartContext.set(productId!, purchaseData))
+  const saveProductInCart = (id: string, title: string, quantity : Number, subtotal: Number) => {
+    const cartProduct = { id: id, title: title, quantity: quantity, subtotal: subtotal } as CartProduct
+    setCartContext(cartContext.set(productId!, cartProduct))
   }
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ProductPage = () => {
           {[...Array(product.stock)].map((_, i) => ( <option key={i + 1} value={`${i + 1}`}>{`${i + 1}`}</option> ))}
         </select>
 
-        <button onClick={() => saveProductInCart(quantitySelected, quantitySelected * product.price)} id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'>
+        <button onClick={() => saveProductInCart(productId!, product.name, quantitySelected, quantitySelected * product.price)} id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'>
           Agregar al carrito
         </button>
         
