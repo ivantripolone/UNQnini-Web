@@ -10,6 +10,10 @@ const Topbar = () => {
     navigate('/')
   }
 
+  const handleCartClick = () => {
+    navigate('/carrito')
+  }
+
   return (
     <Navbar bg='nav'>
       <Container>
@@ -27,7 +31,14 @@ const Topbar = () => {
           </Navbar.Brand>
         </Navbar.Collapse>
         <Navbar.Collapse className='justify-content-end'>
-          <img src={carrito} width='30' height='30' alt='carrito' />
+          <img
+            onClick={handleCartClick}
+            src={carrito}
+            width='30'
+            height='30'
+            alt='carrito'
+            style={{ cursor: 'pointer' }}
+          />
         </Navbar.Collapse>
       </Container>
     </Navbar>
