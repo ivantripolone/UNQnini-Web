@@ -2,7 +2,8 @@ export type CartProduct = {
     id: string
     title: string
     quantity: Number
-    subtotal: Number
+    price: Number
+    stock: Number
 }
 
 export type CartProductContextType = {

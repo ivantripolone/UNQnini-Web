@@ -21,8 +21,8 @@ const ProductPage = () => {
   const [quantitySelected, setQuantitySelected]= useState<number>(1)
   const { cartContext , setCartContext } = useContext(DataContext) as CartProductContextType
   
-  const saveProductInCart = (id: string, title: string, quantity : Number, subtotal: Number) => {
-    const cartProduct = { id: id, title: title, quantity: quantity, subtotal: subtotal } as CartProduct
+  const saveProductInCart = (id: string, title: string, quantity : Number, price: Number,  stock : Number) => {
+    const cartProduct = { id: id, title: title, quantity: quantity, price: price, stock : stock } as CartProduct
     setCartContext(cartContext.set(productId!, cartProduct))
   }
 
@@ -44,7 +44,7 @@ const ProductPage = () => {
           {[...Array(product.stock)].map((_, i) => ( <option key={i + 1} value={`${i + 1}`}>{`${i + 1}`}</option> ))}
         </select>
 
-        <button onClick={() => saveProductInCart(productId!, product.name, quantitySelected, quantitySelected * product.price)} id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'>
+        <button onClick={() => saveProductInCart(productId!, product.name, quantitySelected, product.price, product.stock)} id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'>
           Agregar al carrito
         </button>
         
