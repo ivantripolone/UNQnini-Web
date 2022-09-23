@@ -2,16 +2,34 @@ import { useState } from 'react'
 import { Col, Container, FormCheck, FormControl, FormLabel, Row } from 'react-bootstrap'
 
 const Purchase = () => {
-  const [tipoDeEnvio, setTipoDeEnvio] = useState('')
+  const [tipoDeEnvio, setTipoDeEnvio] = useState('Retiro')
 
   return (
     <div className='PurchasePage'>
       <div className='PurchaseContainer'>
         <Container>
           <Row>
-            <Col> Datos del comprador </Col>
             <Col>
-              <p>Datos de envío</p>
+              <p>Datos del comprador:</p>
+              <FormControl
+                type='text'
+                placeholder='Nombre y Apellido'
+              />
+              <FormControl
+                type='text'
+                placeholder='Nombre del comercio'
+              />
+              <FormControl
+                type='number'
+                placeholder='CUIT del comercio'
+              />
+              <FormControl
+                type='text'
+                placeholder='Dirección del comercio'
+              />
+            </Col>
+            <Col>
+              <p>Datos de envío:</p>
               <div>
                 {tipoDeEnvio == 'Envio' ? (
                   <div>
@@ -19,7 +37,7 @@ const Purchase = () => {
                     <FormControl type='text' />
                   </div>
                 ) : (
-                  <div></div>
+                  <div>Se retira en nuestra sucursal.</div>
                 )}
               </div>
             </Col>
@@ -27,11 +45,13 @@ const Purchase = () => {
           </Row>
           <Row>
             <Col>
+              <p> Selección de envío: </p>
               <FormCheck
                 type='radio'
                 id='inline-radio'
                 name='group1'
                 label='Retirar producto'
+                checked={tipoDeEnvio === 'Retiro'}
                 onChange={() => setTipoDeEnvio('Retiro')}
               />
               <FormCheck
