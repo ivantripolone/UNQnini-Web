@@ -1,9 +1,11 @@
-export type PurchaseData = {
-    quantitySelected: Number;
-    totalToPay: Number;
-};
+export type CartProduct = {
+    id: string
+    title: string
+    quantity: Number
+    subtotal: Number
+}
 
-export type PurchaseDataContextType = {
-    CartContext: Map<string, PurchaseData>;
-    setCartContext: (value: Map<string, PurchaseData>) => void;
+export type CartProductContextType = {
+    cartContext: Map<string, CartProduct>;
+    setCartContext: (value: Map<string, CartProduct>) => void;
 };

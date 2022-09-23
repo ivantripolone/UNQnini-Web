@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
-import { PurchaseData } from './types'
+import { CartProduct } from './types'
 
 export const DataContext = createContext({})
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const DataProvider = ({ children }: Props) => {
-  const [CartContext, setCartContext] = useState<Map<String, PurchaseData>>(new Map())
+  const [cartContext, setCartContext] = useState<Map<String, CartProduct>>(new Map())
 
-  return <DataContext.Provider value={{ CartContext, setCartContext }}>{children}</DataContext.Provider>
+  return <DataContext.Provider value={{ cartContext: cartContext, setCartContext }}>{children}</DataContext.Provider>
 }
