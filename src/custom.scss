@@ -35,6 +35,22 @@ $theme-colors: (
     justify-content: center;
 }
 
+.ProductTableContainer {
+    display: flex;
+    align-content: center;
+    background-color: #ded4d4;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 100px;
+}
+
+.CartFooter {
+    display: flex;
+    align-content: center;
+    margin-left: 150px;
+    margin-right: 150px;
+}
 
 
 @import "~bootstrap/scss/bootstrap";
