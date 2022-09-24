@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Table } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
 import { CartProduct, CartProductContextType } from '../../context/types'
 import Pay_Button from '../../img/Pay_Button.png'
@@ -8,38 +9,58 @@ import TableElement from '.././TableElement'
 const Cart = () => {
   const { cartContext } = useContext(DataContext) as CartProductContextType
 
-  const tableValues = () => {
-    const products : CartProduct[]= []
-    let total = 0
-    
-    cartContext.forEach((value: CartProduct) => { products.push(value); total += (value.quantity as number) * (value.price as number) })
+  const navigate = useNavigate()
 
-    const tableElements = products.map((product : CartProduct) => { return ( <TableElement key={`TableElementKey_${product.id}`} {...product} />) })
+  const products: CartProduct[] = []
+  let total = 0
 
-    const totalToPay = (
-      <tr>
-       <h3>Total: ${total}</h3>
-       <button id='BotonPagarProductos'><img alt='' src={Pay_Button}/></button>
-     </tr>)
+  cartContext.forEach((value: CartProduct) => {
+    products.push(value)
+    total += (value.quantity as number) * (value.price as number)
+  })
 
-    return(tableElements.concat([totalToPay]))
+  const tableElements = products.map((product: CartProduct) => {
+    return (
+      <TableElement
+        key={`TableElementKey_${product.id}`}
+        {...product}
+      />
+    )
+  })
+
+  const handleClick = () => {
+    navigate('/purchase')
   }
 
+  const totalToPay = (
+    <div className='p-15'>
+      <h3>Total: ${total}</h3>
+      <button
+        onClick={handleClick}
+        id='BotonPagarProductos'
+      >
+        <img
+          alt=''
+          src={Pay_Button}
+        />
+      </button>
+    </div>
+  )
+
   return (
-      <div className='ProductTableContainer'>
-        <Table borderless>
-          <thead>
-            <tr>
-              <th> Producto </th>
-              <th> Cantidad </th>
-              <th> Subtotal </th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableValues()}
-          </tbody>
-        </Table>
-      </div>
+    <div className='d-flex flex-column ProductTableContainer'>
+      <Table borderless>
+        <thead>
+          <tr>
+            <th> Producto </th>
+            <th> Cantidad </th>
+            <th> Subtotal </th>
+          </tr>
+        </thead>
+        <tbody>{tableElements}</tbody>
+      </Table>
+      {totalToPay}
+    </div>
   )
 }
 
