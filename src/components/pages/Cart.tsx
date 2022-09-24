@@ -33,7 +33,7 @@ const Cart = () => {
   }
 
   const totalToPay = (
-    <div className='p-15'>
+    <div style={{ padding: '15px' }}>
       <h3>Total: ${total}</h3>
       <button
         onClick={handleClick}
