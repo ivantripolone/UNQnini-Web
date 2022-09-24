@@ -2,38 +2,24 @@ import { useContext } from 'react'
 import { Table } from 'react-bootstrap'
 import { DataContext } from '../../context/DataContext'
 import { CartProduct, CartProductContextType } from '../../context/types'
-import Delete_Button from '../../img/Delete_Button.png'
 import Pay_Button from '../../img/Pay_Button.png'
+import TableElement from '.././TableElement'
 
 const Cart = () => {
-  const { cartContext , setCartContext } = useContext(DataContext) as CartProductContextType
-  
-  const handleDelete = (productId : string) => {
-    cartContext.delete(productId)
-    setCartContext(new Map(cartContext))
-  } 
+  const { cartContext } = useContext(DataContext) as CartProductContextType
 
   const tableValues = () => {
-    const products = new Array()
+    const products : CartProduct[]= []
     let total = 0
     
-    cartContext.forEach((value: CartProduct) => { products.push(value); total += value.subtotal as number})
+    cartContext.forEach((value: CartProduct) => { products.push(value); total += (value.quantity as number) * (value.price as number) })
 
-    const tableElements = products.map((product) => {
-      return (
-        <tr id={product.id}>
-          <th>{product.title}</th>
-          <th>{product.quantity.toString()}</th>
-          <th>${product.subtotal.toString()}</th>
-          <th><button onClick={() => handleDelete(product.id)} id='BotonEliminarProducto'><img src={Delete_Button}/></button></th>
-        </tr>
-      )
-    })
+    const tableElements = products.map((product : CartProduct) => { return ( <TableElement key={`TableElementKey_${product.id}`} {...product} />) })
 
     const totalToPay = (
       <tr>
        <h3>Total: ${total}</h3>
-       <button id='BotonPagarProductos'><img src={Pay_Button}/></button>
+       <button id='BotonPagarProductos'><img alt='' src={Pay_Button}/></button>
      </tr>)
 
     return(tableElements.concat([totalToPay]))
