@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FormCheck, FormControl } from 'react-bootstrap'
+import { FormCheck, FormControl, InputGroup } from 'react-bootstrap'
 import PurchaseSection from './PurchaseSection'
 
 const Purchase = () => {
@@ -85,7 +85,7 @@ const Purchase = () => {
             name='group2'
             label='Pago con tarjeta de crédito'
             onChange={() => {
-              setTipoDePago('')
+              setTipoDePago('Tarjeta de Crédito')
             }}
           />
           {tipoDePago === 'Efectivo' ? (
@@ -117,6 +117,51 @@ const Purchase = () => {
                   placeholder='Cantidad para abono'
                 />
               )}
+            </div>
+          ) : null}
+          {tipoDePago === 'Tarjeta de Crédito' ? (
+            <div>
+              <FormControl
+                style={{ width: '40%' }}
+                type='text'
+                placeholder='Nombre y Apellido (como figuran en la tarjeta)'
+              />
+              <FormControl
+                style={{ width: '40%' }}
+                type='number'
+                placeholder='Número de tarjeta'
+              />
+              <p>Fecha de caducidad:</p>
+              <InputGroup style={{ width: '20%' }}>
+                <FormControl
+                  type='number'
+                  placeholder='Mes'
+                />
+                <InputGroup.Text>/</InputGroup.Text>
+                <FormControl
+                  type='number'
+                  placeholder='Año'
+                />
+              </InputGroup>
+              <FormControl
+                style={{ width: '40%' }}
+                type='number'
+                placeholder='Código de seguridad (reverso de tarjeta)'
+              />
+              <h2>Elegir cuotas:</h2>
+              <FormCheck
+                type='radio'
+                id='inline-radio'
+                name='group4'
+                label='1 cuota'
+                checked={true}
+              />
+              <FormCheck
+                type='radio'
+                id='inline-radio'
+                name='group4'
+                label='3 cuotas'
+              />
             </div>
           ) : null}
         </PurchaseSection>
