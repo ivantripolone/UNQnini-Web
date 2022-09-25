@@ -4,6 +4,8 @@ import PurchaseSection from './PurchaseSection'
 
 const Purchase = () => {
   const [tipoDeEnvio, setTipoDeEnvio] = useState('Retiro')
+  const [tipoDePago, setTipoDePago] = useState('')
+  const [abonoJusto, setAbonoJusto] = useState(true)
 
   return (
     <div className='PurchasePage'>
@@ -61,7 +63,62 @@ const Purchase = () => {
           </div>
         </PurchaseSection>
         <PurchaseSection title={'PAGO'}>
-          <div>asdjhnaskldnaskdn</div>
+          <FormCheck
+            type='radio'
+            id='inline-radio'
+            name='group2'
+            label='Pago en efectivo'
+            onChange={() => setTipoDePago('Efectivo')}
+          />
+          <FormCheck
+            type='radio'
+            id='inline-radio'
+            name='group2'
+            label='Pago con tarjeta de débito'
+            onChange={() => {
+              setTipoDePago('')
+            }}
+          />
+          <FormCheck
+            type='radio'
+            id='inline-radio'
+            name='group2'
+            label='Pago con tarjeta de crédito'
+            onChange={() => {
+              setTipoDePago('')
+            }}
+          />
+          {tipoDePago === 'Efectivo' ? (
+            <div>
+              <p>Abona cantidad exacta:</p>
+              <FormCheck
+                type='radio'
+                id='inline-radio'
+                name='group3'
+                label='Sí'
+                checked={abonoJusto}
+                onChange={() => {
+                  setAbonoJusto(true)
+                }}
+              />
+              <FormCheck
+                type='radio'
+                id='inline-radio'
+                name='group3'
+                label='No'
+                onChange={() => {
+                  setAbonoJusto(false)
+                }}
+              />
+              {abonoJusto ? null : (
+                <FormControl
+                  style={{ width: '40%' }}
+                  type='number'
+                  placeholder='Cantidad para abono'
+                />
+              )}
+            </div>
+          ) : null}
         </PurchaseSection>
       </div>
     </div>
