@@ -76,7 +76,7 @@ const Purchase = () => {
             name='group2'
             label='Pago con tarjeta de débito'
             onChange={() => {
-              setTipoDePago('')
+              setTipoDePago('Tarjeta de Débito')
             }}
           />
           <FormCheck
@@ -117,6 +117,37 @@ const Purchase = () => {
                   placeholder='Cantidad para abono'
                 />
               )}
+            </div>
+          ) : null}
+          {tipoDePago === 'Tarjeta de Débito' ? (
+            <div>
+              <FormControl
+                style={{ width: '40%' }}
+                type='text'
+                placeholder='Nombre y Apellido (como figuran en la tarjeta)'
+              />
+              <FormControl
+                style={{ width: '40%' }}
+                type='number'
+                placeholder='Número de tarjeta'
+              />
+              <p>Fecha de caducidad:</p>
+              <InputGroup style={{ width: '20%' }}>
+                <FormControl
+                  type='number'
+                  placeholder='Mes'
+                />
+                <InputGroup.Text>/</InputGroup.Text>
+                <FormControl
+                  type='number'
+                  placeholder='Año'
+                />
+              </InputGroup>
+              <FormControl
+                style={{ width: '40%' }}
+                type='number'
+                placeholder='Código de seguridad (reverso de tarjeta)'
+              />
             </div>
           ) : null}
           {tipoDePago === 'Tarjeta de Crédito' ? (
