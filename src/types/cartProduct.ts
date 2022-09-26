@@ -11,4 +11,10 @@ export type CartProductContextType = {
     setCartContext: (value: Map<string, CartProduct>) => void;
 }
 
+export type MessageErrorContextType = {
+    getErrorMessagesForProducts: string;
+    setErrorMessagesForProducts: (messages: string) => void;
+}
+
+
 export { }

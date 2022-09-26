@@ -9,6 +9,7 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
   const [cartContext, setCartContext] = useState<Map<String, CartProduct>>(new Map())
+  const [getErrorMessagesForProducts, setErrorMessagesForProducts] = useState('')
 
-  return <DataContext.Provider value={{ cartContext: cartContext, setCartContext }}>{children}</DataContext.Provider>
+  return <DataContext.Provider value={{ cartContext: cartContext, setCartContext, getErrorMessagesForProducts, setErrorMessagesForProducts }}>{children}</DataContext.Provider>
 }

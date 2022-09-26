@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FormCheck, FormControl, InputGroup } from 'react-bootstrap'
 import PurchaseSection from './PurchaseSection'
 import orderService from '../../services/orderService'
 import { OrderCash , Order, OrderCard, OrderCreditCard} from '../../types/order'
 import { DataContext } from '../../context/DataContext'
-import { CartProduct, CartProductContextType } from '../../types/cartProduct'
+import { CartProductContextType, MessageErrorContextType } from '../../types/cartProduct'
 import ToastMessage from './ToastMessage'
 
 const Purchase = () => {
   const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
+  const { setErrorMessagesForProducts } = useContext(DataContext) as MessageErrorContextType
   const [getBuyerName, setBuyerName] = useState('')
   const [getBusinessName, setBusinessName] = useState('')
   const [getCuit, setCuit] = useState('')
@@ -27,18 +29,10 @@ const Purchase = () => {
   const [getShowFlag, setShowFlag] = useState('')
   const [getMessage, setMessage] = useState('Bienvenido a la sección de pago, ingrese todos los datos solicitados.')
   const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag}/>
-
+  const navigate = useNavigate()
 
   const concludePurchase = () => {
     
-    const getProductOrders = () => {
-      const productOrders : Map<string, number> = new Map<string, number>()
-      cartContext.forEach(((value : CartProduct, key : string) => productOrders.set(key, value.quantity as number)))
-      return productOrders
-    }
-
-    const productOrders : Map<string, number> = getProductOrders()
-
     const order : Order = {
       buyerName: getBuyerName,
       businessName: getBusinessName,
@@ -46,8 +40,10 @@ const Purchase = () => {
       businessAddress: getBusinessAddress,
       isByHomeDelivery: isByHomeDelivery,
       deliveryAddress: getDeliveryAddress,
-      products: Object.fromEntries(productOrders)
+      products: Object.assign({}, ...Array.from(cartContext.entries()).map(([k, v]) =>({[k]: v.quantity}) ))
     }
+
+    console.log(cartContext)
     
     if(getPaymentType === 'Efectivo') {
       const orderCash = { 
@@ -56,6 +52,7 @@ const Purchase = () => {
     
       orderService.postOrderCash(Object.assign({}, order, orderCash) as OrderCash)
                   .then(() => { setMessage('Su compra se realizo con exito.'); setCartContext(new Map()) })
+                  .catch((error) => { setErrorMessagesForProducts(error.response.data.message); navigate(`/carrito`, { replace: true })})
     } else {
       const orderCard = { 
         payerName: getPayerName,
@@ -66,16 +63,16 @@ const Purchase = () => {
       if(getPaymentType === 'Tarjeta de Crédito') {
         orderService.postOrderCreditCard(Object.assign({}, order, orderCard, {amountOfPayments: getAmountOfPayments}) as OrderCreditCard)
                     .then(() => { setMessage('Su compra se realizo con exito.'); setCartContext(new Map()) })
+                    .catch((error) => { setErrorMessagesForProducts(error.response.data.message); navigate(`/carrito`, { replace: true })})
       } else {
         orderService.postOrderDebitCard(Object.assign({}, order, orderCard) as OrderCard)
                     .then(() => { setMessage('Su compra se realizo con exito.'); setCartContext(new Map()) })
+                    .catch((error) => { setErrorMessagesForProducts(error.response.data.message); navigate(`/carrito`, { replace: true })})
       }
     }
   }
 
-  useEffect(() => {
-    setShowFlag('show')
-}, [getMessage])
+  useEffect(() => { setShowFlag('show') }, [getMessage])
 
 
   return (
