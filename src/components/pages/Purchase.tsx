@@ -51,8 +51,8 @@ const Purchase = () => {
         payAmount: getAmountToPayInCash }
     
       orderService.postOrderCash(Object.assign({}, order, orderCash) as OrderCash)
-                  .then(() => { setMessage('Su compra se realizo con exito.'); setCartContext(new Map()) })
-                  .catch((error) => { setErrorMessagesForProducts(error.response.data.message); navigate(`/carrito`, { replace: true })})
+                  .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+                  .catch((error) => { setErrorMessagesForProducts('Tu pedido no pudo ser concretado, hubo un problema: ' + error.response.data.message); navigate(`/carrito`, { replace: true })})
     } else {
       const orderCard = { 
         payerName: getPayerName,
@@ -62,12 +62,12 @@ const Purchase = () => {
 
       if(getPaymentType === 'Tarjeta de Crédito') {
         orderService.postOrderCreditCard(Object.assign({}, order, orderCard, {amountOfPayments: getAmountOfPayments}) as OrderCreditCard)
-                    .then(() => { setMessage('Su compra se realizo con exito.'); setCartContext(new Map()) })
-                    .catch((error) => { setErrorMessagesForProducts(error.response.data.message); navigate(`/carrito`, { replace: true })})
+                    .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+                    .catch((error) => { setErrorMessagesForProducts('Tu pedido no pudo ser concretado, hubo un problema: ' + error.response.data.message); navigate(`/carrito`, { replace: true })})
       } else {
         orderService.postOrderDebitCard(Object.assign({}, order, orderCard) as OrderCard)
-                    .then(() => { setMessage('Su compra se realizo con exito.'); setCartContext(new Map()) })
-                    .catch((error) => { setErrorMessagesForProducts(error.response.data.message); navigate(`/carrito`, { replace: true })})
+                    .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+                    .catch((error) => { setErrorMessagesForProducts('Tu pedido no pudo ser concretado, hubo un problema: ' + error.response.data.message); navigate(`/carrito`, { replace: true })})
       }
     }
   }
@@ -282,7 +282,7 @@ const Purchase = () => {
             </div>
           ) : null}
         </PurchaseSection>
-        <button className="align-self-center bg-light d-flex flex-column" disabled={cartContext.size === 0} onClick={() => concludePurchase()} id='BotonPagar'> Terminar Compra</button>
+        <button className="align-self-center bg-light d-flex flex-column" disabled={cartContext.size === 0} onClick={() => concludePurchase()} id='BotonPagar'>Finalizar Compra</button>
       </div>
       {defaultToastMessage}
     </div>
