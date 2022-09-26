@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
-import { CartProduct, CartProductContextType } from '../context/types'
-import Delete_Button from '../../src/img/Delete_Button.png'
+import { CartProduct, CartProductContextType } from '../types/cartProduct'
+import Delete_Button from '../../src/assets/Delete_Button.png'
 import { DataContext } from '../context/DataContext'
 
 
