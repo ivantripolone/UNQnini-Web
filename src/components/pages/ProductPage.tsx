@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
 import productsService from '../../services/productsService'
 import { Product } from '../../types/product'
-import { CartProduct, CartProductContextType } from '../../context/types'
+import { CartProduct, CartProductContextType } from '../../types/cartProduct'
 
 const initialProduct = {
   id: '',

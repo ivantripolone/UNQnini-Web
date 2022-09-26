@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
-import { CartProduct } from './types'
+import { CartProduct } from '../types/cartProduct'
 
 export const DataContext = createContext({})
 

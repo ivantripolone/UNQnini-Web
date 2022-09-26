@@ -9,4 +9,6 @@ export type CartProduct = {
 export type CartProductContextType = {
     cartContext: Map<string, CartProduct>;
     setCartContext: (value: Map<string, CartProduct>) => void;
-};
+}
+
+export { }

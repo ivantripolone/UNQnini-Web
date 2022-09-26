@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import { Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
-import { CartProduct, CartProductContextType } from '../../context/types'
-import Pay_Button from '../../img/Pay_Button.png'
+import { CartProduct, CartProductContextType } from '../../types/cartProduct'
+import Pay_Button from '../../assets/Pay_Button.png'
 import TableElement from '.././TableElement'
 
 const Cart = () => {
