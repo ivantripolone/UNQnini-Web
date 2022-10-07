@@ -11,7 +11,7 @@ const Filter = ({ title, selected, setSelected }: FilterProps) => {
   const { setProducts, allProducts } = useContext(ProductsContext)
 
   return (
-    <div className='d-flex flex-row align-items-baseline gap-1'>
+    <div className='d-flex flex-row align-items-baseline gap-2'>
       <div>{title}:</div>
       <div>
         <select
