@@ -1,14 +1,16 @@
 import { useContext } from 'react'
 import { ProductsContext } from '../../context/ProductsContext'
+import { Product } from '../../types/product'
 
 interface FilterProps {
   title: string
   selected: string
   setSelected: React.Dispatch<React.SetStateAction<string>>
+  productField: (product: Product) => string
 }
 
-const Filter = ({ title, selected, setSelected }: FilterProps) => {
-  const { setProducts, allProducts } = useContext(ProductsContext)
+const Filter = ({ title, selected, setSelected, productField }: FilterProps) => {
+  const { allProducts } = useContext(ProductsContext)
 
   return (
     <div className='d-flex flex-row align-items-baseline gap-2'>
@@ -19,7 +21,6 @@ const Filter = ({ title, selected, setSelected }: FilterProps) => {
           value={selected}
           onChange={({ target: { value } }) => {
             setSelected(value)
-            setProducts(value === '' ? allProducts : allProducts.filter((product) => product['name'] === value))
           }}
         >
           <option
@@ -28,7 +29,7 @@ const Filter = ({ title, selected, setSelected }: FilterProps) => {
           >
             {''}
           </option>
-          {Array.from(new Set(allProducts.map((product) => product['name']))).map((element) => (
+          {Array.from(new Set(allProducts.map(product => productField(product)))).map((element) => (
             <option
               key={element}
               value={element}
