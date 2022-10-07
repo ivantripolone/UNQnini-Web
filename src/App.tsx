@@ -3,21 +3,48 @@ import Catalog from './components/pages/Catalog'
 import Home from './components/pages/Home'
 import ProductPage from './components/pages/ProductPage'
 import ErrorPage from './components/pages/ErrorPage'
-
+import { DataProvider } from './context/DataContext'
+import Cart from './components/pages/Cart'
+import Purchase from './components/pages/Purchase'
 const App = () => {
   return (
-    <div className='AppContainer'>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />}>
-            <Route index element={<Catalog />} />
-            <Route path='/product/:productId' element={<ProductPage />} />
-            <Route path='/error/:errorId' element={<ErrorPage />} />
-            <Route path='*' element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <DataProvider>
+      <div className='AppContainer'>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home />}
+            >
+              <Route
+                index
+                element={<Catalog />}
+              />
+              <Route
+                path='/product/:productId'
+                element={<ProductPage />}
+              />
+              <Route
+                path='/carrito'
+                element={<Cart />}
+              />
+              <Route
+                path='/purchase'
+                element={<Purchase />}
+              />
+              <Route
+                path='/error/:errorId'
+                element={<ErrorPage />}
+              />
+              <Route
+                path='*'
+                element={<ErrorPage />}
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </DataProvider>
   )
 }
 
