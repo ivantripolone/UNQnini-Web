@@ -6,6 +6,8 @@ import ErrorPage from './components/pages/ErrorPage'
 import { DataProvider } from './context/DataContext'
 import Cart from './components/pages/Cart'
 import Purchase from './components/pages/Purchase'
+import { ProductsProvider } from './context/ProductsContext'
+
 const App = () => {
   return (
     <DataProvider>
@@ -18,7 +20,11 @@ const App = () => {
             >
               <Route
                 index
-                element={<Catalog />}
+                element={
+                  <ProductsProvider>
+                    <Catalog />
+                  </ProductsProvider>
+                }
               />
               <Route
                 path='/product/:productId'
