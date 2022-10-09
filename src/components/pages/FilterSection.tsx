@@ -43,10 +43,8 @@ const FilterSection = () => {
           (product) =>
             // TODO: cambiar product.name por product.license
             complies(selectedLicence, selectedLicence === product.name) &&
-            // TODO: cambiar product.name por product.category
             complies(selectedCategory, selectedCategory === product.category) &&
-            // TODO: cambiar product.name por product.year
-            complies(selectedYear, selectedYear === product.name) &&
+            complies(selectedYear, selectedYear === product.year) &&
             complies(selectedSearch, product.name.toLowerCase().includes(selectedSearch.toLowerCase()))
         )
         .sort(comparator)
@@ -67,15 +65,13 @@ const FilterSection = () => {
           selected={selectedCategory}
           setSelected={setSelectedCategory}
           title='Categoría'
-          // TODO: cambiar product.name por product.category
           productField={(product) => product.category}
         />
         <Filter
           selected={selectedYear}
           setSelected={setSelectedYear}
           title='Año'
-          // TODO: cambiar product.name por product.year
-          productField={(product) => product.name}
+          productField={(product) => product.year}
         />
       </div>
       <div className='d-flex flex-row justify-content-around gap-3 p-2'>
