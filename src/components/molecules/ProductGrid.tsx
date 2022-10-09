@@ -1,18 +1,15 @@
-import { useContext } from 'react'
-import { ProductsContext } from '../../context/ProductsContext'
 import { Product } from '../../types/product'
 import ProductCard from './ProductCard'
 
-const ProductGrid = () => {
-  const { products } = useContext(ProductsContext)
+interface ProductGridProps {
+  products: Product[]
+}
 
+const ProductGrid = ({ products }: ProductGridProps) => {
   return (
     <div className='ProductGridContainer'>
       {products.map((product: Product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-        />
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   )
