@@ -41,10 +41,10 @@ const FilterSection = () => {
       allProducts
         .filter(
           (product) =>
-            // TODO: cambiar product.name por product.licence
+            // TODO: cambiar product.name por product.license
             complies(selectedLicence, selectedLicence === product.name) &&
             // TODO: cambiar product.name por product.category
-            complies(selectedCategory, selectedCategory === product.name) &&
+            complies(selectedCategory, selectedCategory === product.category) &&
             // TODO: cambiar product.name por product.year
             complies(selectedYear, selectedYear === product.name) &&
             complies(selectedSearch, product.name.toLowerCase().includes(selectedSearch.toLowerCase()))
@@ -68,7 +68,7 @@ const FilterSection = () => {
           setSelected={setSelectedCategory}
           title='Categoría'
           // TODO: cambiar product.name por product.category
-          productField={(product) => product.name}
+          productField={(product) => product.category}
         />
         <Filter
           selected={selectedYear}
