@@ -41,8 +41,7 @@ const FilterSection = () => {
       allProducts
         .filter(
           (product) =>
-            // TODO: cambiar product.name por product.license
-            complies(selectedLicence, selectedLicence === product.name) &&
+            complies(selectedLicence, selectedLicence === product.license) &&
             complies(selectedCategory, selectedCategory === product.category) &&
             complies(selectedYear, selectedYear === product.year) &&
             complies(selectedSearch, product.name.toLowerCase().includes(selectedSearch.toLowerCase()))
@@ -58,8 +57,7 @@ const FilterSection = () => {
           selected={selectedLicence}
           setSelected={setSelectedLicence}
           title='Licencia'
-          // TODO: cambiar product.name por product.licence
-          productField={(product) => product.name}
+          productField={(product) => product.license}
         />
         <Filter
           selected={selectedCategory}

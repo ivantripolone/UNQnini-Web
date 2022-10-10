@@ -7,4 +7,5 @@ export interface Product {
   stock: number
   category: string
   year: string
+  license: string
 }
