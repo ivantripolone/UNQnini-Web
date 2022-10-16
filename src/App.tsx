@@ -31,7 +31,7 @@ const App = () => {
                 element={<ProductPage />}
               />
               <Route
-                path='/carrito'
+                path='/cart'
                 element={<Cart />}
               />
               <Route
