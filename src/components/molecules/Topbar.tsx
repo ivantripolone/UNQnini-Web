@@ -11,7 +11,7 @@ const Topbar = () => {
   }
 
   const handleCartClick = () => {
-    navigate('/carrito')
+    navigate('/cart')
   }
 
   return (
@@ -36,7 +36,7 @@ const Topbar = () => {
             src={carrito}
             width='30'
             height='30'
-            alt='carrito'
+            alt='cart'
             style={{ cursor: 'pointer' }}
           />
         </Navbar.Collapse>
