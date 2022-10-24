@@ -41,7 +41,7 @@ const Purchase = () => {
       isByHomeDelivery: isByHomeDelivery,
       deliveryAddress: getDeliveryAddress,
       products: Object.assign({}, ...Array.from(cartContext.entries()).map(([k, v]) =>({[k]: v.quantity}) )),
-      coupon: discount
+      discount: discount
     }
     
     if(getPaymentType === 'Efectivo') {
