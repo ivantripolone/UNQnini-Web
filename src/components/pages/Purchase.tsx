@@ -6,12 +6,10 @@ import { OrderCash , Order, OrderCard, OrderCreditCard} from '../../types/order'
 import { DataContext } from '../../context/DataContext'
 import { CartProductContextType } from '../../types/cartProduct'
 import ToastMessage from './ToastMessage'
-import { ProductsContextType } from '../../context/ProductsContext'
 import { traducir } from '../extas/Traductor'
 
 const Purchase = () => {
-  const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
-  const { discount } = useContext(DataContext) as ProductsContextType
+  const { cartContext, setCartContext, discount } = useContext(DataContext) as CartProductContextType
   const [getBuyerName, setBuyerName] = useState('')
   const [getBusinessName, setBusinessName] = useState('')
   const [getCuit, setCuit] = useState('')
@@ -41,7 +39,7 @@ const Purchase = () => {
       isByHomeDelivery: isByHomeDelivery,
       deliveryAddress: getDeliveryAddress,
       products: Object.assign({}, ...Array.from(cartContext.entries()).map(([k, v]) =>({[k]: v.quantity}) )),
-      coupon: discount
+      discount: discount
     }
     
     if(getPaymentType === 'Efectivo') {

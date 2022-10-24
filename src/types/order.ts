@@ -6,7 +6,7 @@ export interface Order {
     isByHomeDelivery: boolean
     deliveryAddress: string
     products: { [k: string]: number }
-    coupon: number
+    discount: number
 }
 
 export interface OrderCash extends Order {
