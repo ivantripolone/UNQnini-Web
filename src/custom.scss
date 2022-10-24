@@ -20,6 +20,7 @@ $theme-colors: (
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
+    padding-top: 10px;
     cursor: pointer;
     overflow: hidden;
     outline: none;
@@ -76,5 +77,14 @@ $theme-colors: (
 }
 
 
+.AppContainer {
+    background: #832c1b;
+    min-height: 100vh;
+}
+
+.CuponSection {
+    display: flex;
+    align-items: flex-end;
+}
 
 @import "~bootstrap/scss/bootstrap";
