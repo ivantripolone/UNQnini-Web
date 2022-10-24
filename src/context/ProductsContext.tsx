@@ -11,11 +11,9 @@ interface ProductsProviderProps {
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   const [products, setProducts] = useState<Product[]>([])
   const [allProducts, setAllProducts] = useState<Product[]>([])
-  const [discount, setDiscount] = useState<number>(0)
   
-
   return (
-    <ProductsContext.Provider value={{ products, setProducts, allProducts, setAllProducts, setDiscount, discount }}>
+    <ProductsContext.Provider value={{ products, setProducts, allProducts, setAllProducts}}>
       {children}
     </ProductsContext.Provider>
   )
@@ -26,6 +24,4 @@ export type ProductsContextType = {
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>
   allProducts: Product[]
   setAllProducts: React.Dispatch<React.SetStateAction<Product[]>>
-  setDiscount: React.Dispatch<React.SetStateAction<number>>
-  discount: number
 }

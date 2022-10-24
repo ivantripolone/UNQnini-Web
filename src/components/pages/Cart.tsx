@@ -11,22 +11,22 @@ import ToastMessage from './ToastMessage'
 import couponService from '../../services/couponService'
 
 const Cart = () => {  
-  const { cartContext } = useContext(DataContext) as CartProductContextType
-  const [getDiscount, setDiscount] = useState(0)
-  const [getNameCoupon, setNameCoupon] = useState('')
+  const { cartContext, discount, setDiscount, total, setTotal, getNameCoupon, setNameCoupon, couponApplied, setCouponApplied } = useContext(DataContext) as CartProductContextType
   const [getShowFlag, setShowFlag] = useState('')
-  const [couponApplied, setCouponApplied] = useState(false)
   const [getMessage, setMessage] = useState('Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados')
   const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag}/>
   const navigate = useNavigate()
   
   const products: CartProduct[] = []
-  let total = 0
+  let subTotal = 0
 
-  cartContext.forEach((value: CartProduct) => {
+  {cartContext.forEach((value: CartProduct) => {
     products.push(value)
-    total += (value.quantity as number) * (value.price as number)
+    subTotal += (value.quantity as number) * (value.price as number)
   })
+    setTotal(subTotal)
+  }
+
 
   const tableElements = products.map((product: CartProduct) => {
     return (
@@ -50,7 +50,7 @@ const Cart = () => {
 
   const totalToPay = (
     <div style={{ padding: '15px' }}>
-      <h3>Total: ${total - (total * (getDiscount / 100))}</h3>
+      <h3>Total: ${total - (total * (discount / 100))}</h3>
         <div className='CuponSection'>
             <FormControl
                   style={{ width: '40%' }}
