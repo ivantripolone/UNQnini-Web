@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { FormCheck, FormControl, InputGroup } from 'react-bootstrap'
 import PurchaseSection from './PurchaseSection'
 import orderService from '../../services/orderService'
 import { OrderCash , Order, OrderCard, OrderCreditCard} from '../../types/order'
 import { DataContext } from '../../context/DataContext'
-import { CartProductContextType, MessageErrorContextType } from '../../types/cartProduct'
+import { CartProductContextType } from '../../types/cartProduct'
 import ToastMessage from './ToastMessage'
+import { ProductsContextType } from '../../context/ProductsContext'
+import { traducir } from '../extas/Traductor'
 
 const Purchase = () => {
   const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
-  const { setErrorMessagesForProducts } = useContext(DataContext) as MessageErrorContextType
+  const { discount } = useContext(DataContext) as ProductsContextType
   const [getBuyerName, setBuyerName] = useState('')
   const [getBusinessName, setBusinessName] = useState('')
   const [getCuit, setCuit] = useState('')
@@ -29,7 +30,6 @@ const Purchase = () => {
   const [getShowFlag, setShowFlag] = useState('')
   const [getMessage, setMessage] = useState('Bienvenido a la sección de pago, ingrese todos los datos solicitados.')
   const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag}/>
-  const navigate = useNavigate()
 
   const concludePurchase = () => {
     
@@ -40,10 +40,9 @@ const Purchase = () => {
       businessAddress: getBusinessAddress,
       isByHomeDelivery: isByHomeDelivery,
       deliveryAddress: getDeliveryAddress,
-      products: Object.assign({}, ...Array.from(cartContext.entries()).map(([k, v]) =>({[k]: v.quantity}) ))
+      products: Object.assign({}, ...Array.from(cartContext.entries()).map(([k, v]) =>({[k]: v.quantity}) )),
+      coupon: discount
     }
-
-    console.log(cartContext)
     
     if(getPaymentType === 'Efectivo') {
       const orderCash = { 
@@ -52,7 +51,7 @@ const Purchase = () => {
     
       orderService.postOrderCash(Object.assign({}, order, orderCash) as OrderCash)
                   .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
-                  .catch((error) => { setErrorMessagesForProducts('Tu pedido no pudo ser concretado, hubo un problema: ' + error.response.data.message); navigate(`/carrito`, { replace: true })})
+                  .catch((response) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
     } else {
       const orderCard = { 
         payerName: getPayerName,
@@ -63,13 +62,14 @@ const Purchase = () => {
       if(getPaymentType === 'Tarjeta de Crédito') {
         orderService.postOrderCreditCard(Object.assign({}, order, orderCard, {amountOfPayments: getAmountOfPayments}) as OrderCreditCard)
                     .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
-                    .catch((error) => { setErrorMessagesForProducts('Tu pedido no pudo ser concretado, hubo un problema: ' + error.response.data.message); navigate(`/carrito`, { replace: true })})
+                    .catch((response) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
       } else {
         orderService.postOrderDebitCard(Object.assign({}, order, orderCard) as OrderCard)
                     .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
-                    .catch((error) => { setErrorMessagesForProducts('Tu pedido no pudo ser concretado, hubo un problema: ' + error.response.data.message); navigate(`/carrito`, { replace: true })})
+                    .catch((response) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
       }
     }
+    console.log(getBusinessName)
   }
 
   useEffect(() => { setShowFlag('show') }, [getMessage])
@@ -141,6 +141,7 @@ const Purchase = () => {
             id='inline-radio'
             name='group2'
             label='Pago en efectivo'
+            checked={getPaymentType == 'Efectivo'}
             onChange={() => setPaymentType('Efectivo')}
           />
           <FormCheck
