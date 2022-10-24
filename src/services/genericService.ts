@@ -10,7 +10,7 @@ const genericService = (serviceBaseRoute: string) => {
       ),
     post: <T>(endpoint: string, data: Object, config: AxiosRequestConfig = {}) =>
       Axios.post<T>(apiURL + serviceBaseRoute + endpoint, data, config).then(
-        (response) => response.data
+        (response) => response
       )
   }
 }
