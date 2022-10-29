@@ -7,6 +7,7 @@ import { DataProvider } from './context/DataContext'
 import Cart from './components/pages/Cart'
 import Purchase from './components/pages/Purchase'
 import { ProductsProvider } from './context/ProductsContext'
+import Login from './components/pages/Login'
 
 const App = () => {
   return (
@@ -37,6 +38,10 @@ const App = () => {
               <Route
                 path='/purchase'
                 element={<Purchase />}
+              />
+              <Route
+                path='/login'
+                element={<Login />}
               />
               <Route
                 path='/error/:errorId'
