@@ -1,16 +1,9 @@
+import { useState } from 'react'
 import { Button, Col, FormControl, Row } from 'react-bootstrap'
+import usericon from '../../assets/usericon.png'
 
 const Profile = () => {
-  //mock de usuario logueado
-  const userData = {
-    username: 'user',
-    pictureUrl: 'https://i.imgur.com/5woimoe.jpeg',
-    name: 'Juan Perez',
-    cuit: '1234567812345678',
-    shopname: 'Tienda Perez',
-    shopaddress: 'H. Yrigoyen 2350',
-    password: '123456',
-  }
+  const [modificando, setModificando] = useState(false)
 
   return (
     <div className='d-flex flex-row ProfilePage'>
@@ -18,14 +11,14 @@ const Profile = () => {
         <div className='d-flex flex-column ProfileCard'>
           <Row>
             <img
-              src={userData.pictureUrl}
+              src={usericon}
               width='256'
               height='256'
-              alt='imagen'
+              alt=''
             />
           </Row>
           <Row>
-            <h2>{userData.username}</h2>
+            <h2>user</h2>
           </Row>
         </div>
       </Col>
@@ -34,32 +27,41 @@ const Profile = () => {
           <Row>
             <FormControl
               type='text'
-              placeholder={userData.name}
-              disabled
+              placeholder='Nombre y Apellido'
+              plaintext={!modificando}
+              disabled={!modificando}
+            />
+            <FormControl
+              type='number'
+              placeholder='CUIT'
+              plaintext={!modificando}
+              disabled={!modificando}
             />
             <FormControl
               type='text'
-              placeholder={userData.cuit}
-              disabled
+              placeholder='Nombre del comercio'
+              plaintext={!modificando}
+              disabled={!modificando}
             />
             <FormControl
               type='text'
-              placeholder={userData.shopname}
-              disabled
-            />
-            <FormControl
-              type='text'
-              placeholder={userData.shopaddress}
-              disabled
+              placeholder='Direccion del comercio'
+              plaintext={!modificando}
+              disabled={!modificando}
             />
             <FormControl
               type='password'
               placeholder='Contraseña'
-              disabled
+              plaintext={!modificando}
+              disabled={!modificando}
             />
           </Row>
           <Row>
-            <Button>Modificar datos</Button>
+            {modificando ? (
+              <Button onClick={() => setModificando(false)}>Guardar cambios</Button>
+            ) : (
+              <Button onClick={() => setModificando(true)}>Modificar datos</Button>
+            )}
             <Button>Ver Compras realizadas</Button>
           </Row>
         </div>
