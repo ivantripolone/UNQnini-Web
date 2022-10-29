@@ -2,10 +2,8 @@ import { useNavigate } from 'react-router'
 import { Container, Navbar } from 'react-bootstrap'
 import unqniniWebLogo from '../../assets/unqnini-web-logo.png'
 import carrito from '../../assets/carrito.png'
-import { useState } from 'react'
 
 const Topbar = () => {
-  const [logueado, setLogueado] = useState(true)
   const navigate = useNavigate()
 
   const handleClick = () => {
