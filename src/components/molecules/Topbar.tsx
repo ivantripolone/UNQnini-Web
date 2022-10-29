@@ -1,10 +1,15 @@
 import { useNavigate } from 'react-router'
-import { Container, Navbar } from 'react-bootstrap'
+import { Container, Dropdown, DropdownButton, Navbar } from 'react-bootstrap'
 import unqniniWebLogo from '../../assets/unqnini-web-logo.png'
 import carrito from '../../assets/carrito.png'
+import usericon from '../../assets/usericon.png'
+import { useContext } from 'react'
+import { DataContext } from '../../context/DataContext'
+import { SessionContextType } from '../../context/SessionContext'
 
 const Topbar = () => {
   const navigate = useNavigate()
+  const { logueado, setLogueado } = useContext(DataContext) as SessionContextType
 
   const handleClick = () => {
     navigate('/')
@@ -12,6 +17,16 @@ const Topbar = () => {
 
   const handleCartClick = () => {
     navigate('/cart')
+  }
+
+  const login = () => {
+    setLogueado(true)
+    navigate('/login')
+  }
+
+  const logout = () => {
+    setLogueado(false)
+    navigate('/')
   }
 
   return (
@@ -40,6 +55,24 @@ const Topbar = () => {
             style={{ cursor: 'pointer' }}
           />
         </Navbar.Collapse>
+        <DropdownButton
+          title={
+            <img
+              src={usericon}
+              width='30'
+              height='30'
+            />
+          }
+        >
+          {logueado ? (
+            <div>
+              <Dropdown.Item onClick={() => navigate('/profile')}>Ver Perfil</Dropdown.Item>
+              <Dropdown.Item onClick={logout}> Cerrar Sesión </Dropdown.Item>
+            </div>
+          ) : (
+            <Dropdown.Item onClick={login}>Iniciar Sesión</Dropdown.Item>
+          )}
+        </DropdownButton>
       </Container>
     </Navbar>
   )
