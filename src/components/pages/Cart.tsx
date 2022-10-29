@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { SetStateAction, useContext, useEffect, useState } from 'react'
 import { FormControl, Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
@@ -42,8 +42,8 @@ const Cart = () => {
 
   const applyCoupon  = () => {
     couponService.postCoupon({codename: getLocalCoupon})
-                  .then((response) => { setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data)})
-                  .catch((error) => { setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message)})
+                  .then((response: { data: SetStateAction<number> }) => { setShowFlag('show'); setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data)})
+                  .catch((error: { response: { data: { message: string } } }) => { setShowFlag('show'); setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message)})
   }
   
 

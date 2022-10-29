@@ -10,6 +10,10 @@ export const traducir = (fieldName: string) => {
             return 'Direccion del comercio';
         case 'cuit':
             return 'Cuit';
+        case 'userName':
+            return 'Usuario';
+        case 'password':
+            return 'Contraseña';
         default:
             return 'Error Field';
     }

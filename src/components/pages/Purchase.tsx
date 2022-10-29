@@ -50,8 +50,8 @@ const Purchase = () => {
         payAmount: getAmountToPayInCash }
     
       orderService.postOrderCash(Object.assign({}, order, orderCash) as OrderCash)
-                  .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
-                  .catch((response) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
+                  .then(() => { setShowFlag('show'); setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+                  .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
     } else {
       const orderCard = { 
         payerName: getPayerName,
@@ -61,12 +61,12 @@ const Purchase = () => {
 
       if(getPaymentType === 'Tarjeta de Crédito') {
         orderService.postOrderCreditCard(Object.assign({}, order, orderCard, {amountOfPayments: getAmountOfPayments}) as OrderCreditCard)
-                    .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
-                    .catch((response) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
+                    .then(() => { setShowFlag('show'); setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+                    .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
       } else {
         orderService.postOrderDebitCard(Object.assign({}, order, orderCard) as OrderCard)
-                    .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
-                    .catch((response) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
+                    .then(() => { setShowFlag('show'); setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+                    .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})
       }
     }
     console.log(getBusinessName)
