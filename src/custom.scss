@@ -121,4 +121,26 @@ $theme-colors: (
     align-items: flex-end;
 }
 
+.ProfilePage {
+    display: flex;
+    align-content: center;
+    background-color: #ded4d4;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 100px;
+}
+
+.ProfileCard {
+    display: flex;
+    align-content: center;
+    margin-right: 20px;
+}
+
+.ProfileInfo {
+    display: flex;
+    align-content: center;
+    margin-right: 20px;
+}
+
 @import "~bootstrap/scss/bootstrap";
