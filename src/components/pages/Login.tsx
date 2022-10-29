@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from 'react'
 import { DataContext } from '../../context/DataContext'
 import { SessionContextType } from '../../context/SessionContext'
 import { UserData } from '../../types/userData'
+import { RecoverPasswordData } from '../../types/recoverPasswordData'
 import { traducir } from '../extas/Traductor'
 import loginService from '../../services/loginService'
 import { useNavigate } from 'react-router-dom'
@@ -24,11 +25,21 @@ const Login = () => {
     password: getPassword
   }
 
+  const recoverPasswordData : RecoverPasswordData = {
+    userName: getUserName
+  }
+
+  const recoverPassword  = () => {
+    loginService.postRecoverPassword(recoverPasswordData)
+                  .then(( response: { data: {password : string} }) => { setShowFlag('show'); setMessage("Su contraseña es " + response.data.password) })
+                  .catch(() => { setShowFlag('show'); setMessage('No es posible recuperar una contraseña para ese usuario')})  
+  }
 
   const login  = () => {
     loginService.postLogin(userData)
                   .then(( response: { data: {areTheUserDetailsCorrect : boolean} }) => { setLogueado(response.data.areTheUserDetailsCorrect); navigate('/') })
-                  .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setShowFlag('show'); setMessage('Error: El dato ingresado en el campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})  }
+                  .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setShowFlag('show'); setMessage('Error: El dato ingresado en el campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage)})  
+  }
 
   useEffect(() => { setShowFlag('show') }, [getMessage])
 
@@ -51,7 +62,7 @@ const Login = () => {
         </div>
         <div className="col LoginButtons">
           <button onClick={() => login()} id='BotonPagarProductos' > <img alt=''src={Login_Button} /> </button>
-          <button onClick={() => {}} id='BotonPagarProductos' > <img alt=''src={Recover_Password_Button} /> </button>
+          <button onClick={() => recoverPassword()} id='BotonPagarProductos' > <img alt=''src={Recover_Password_Button} /> </button>
         </div>
       </div>
       {defaultToastMessage}
