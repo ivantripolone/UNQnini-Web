@@ -20,7 +20,6 @@ const Topbar = () => {
   }
 
   const login = () => {
-    setLogueado(true)
     navigate('/login')
   }
 

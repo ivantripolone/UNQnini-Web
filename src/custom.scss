@@ -55,6 +55,40 @@ $theme-colors: (
     justify-content: center;
 }
 
+.LoginTableContainer {
+    display: flex;
+    align-content: center;
+    background-color: #ded4d4;
+    margin-top: 50px;
+    margin-left: 500px;
+    margin-right: 500px;
+    margin-bottom: 100px;
+}
+
+.UserNameCase {
+    display: flex;
+    align-content: center;
+    background-color: #ded4d4;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.PasswordCase {
+    display: flex;
+    align-content: center;
+    background-color: #ded4d4;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.LoginButtons {
+    display: flex;
+    align-content: center;
+    background-color: #ded4d4;
+    margin-top: 30px;
+}
+
 .ProductTableContainer {
     display: flex;
     align-content: center;
