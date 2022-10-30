@@ -9,6 +9,7 @@ import Purchase from './components/pages/Purchase'
 import { ProductsProvider } from './context/ProductsContext'
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
+import MyPurchases from './components/pages/MyPurchases'
 
 const App = () => {
   return (
@@ -47,6 +48,10 @@ const App = () => {
               <Route
                 path='/profile'
                 element={<Profile />}
+              />
+              <Route
+                path='/mypurchases'
+                element={<MyPurchases />}
               />
               <Route
                 path='/error/:errorId'

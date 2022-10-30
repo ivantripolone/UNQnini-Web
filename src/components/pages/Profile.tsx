@@ -166,7 +166,9 @@ const Profile = () => {
           </button>
         )}
         <button
-          onClick={() => {}}
+          onClick={() => {
+            navigate('/mypurchases')
+          }}
           id='BotonPagarProductos'
         >
           {' '}
