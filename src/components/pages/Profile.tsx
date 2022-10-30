@@ -24,28 +24,52 @@ const Profile = () => {
   const [getCuit, setCuit] = useState('')
   const [getShowFlag, setShowFlag] = useState('')
   const [getMessage, setMessage] = useState('')
-  const defaultToastMessage = ( <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag}/>)
+  const defaultToastMessage = (
+    <ToastMessage
+      getMessage={getMessage}
+      getShowFlag={getShowFlag}
+      setShowFlag={setShowFlag}
+    />
+  )
 
   const modifiedInformation = () => {
-    const userModified : User = {
+    const userModified: User = {
       username: getUserName,
       password: getPassword,
       fullname: getFullname,
       cuit: getCuit,
       businessName: getBusinessName,
-      businessAddress: getBusinessAddress
+      businessAddress: getBusinessAddress,
     }
-    
+
     userService
-    .postModifiedInformation(userModified)
-    .then(() => {  setMessage('Tus datos fueron guardados correctamente'); setShowFlag('show') })
-    .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Error: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + traducir(response.response.data.errors[0].defaultMessage)); setShowFlag('show')})
+      .postModifiedInformation(userModified)
+      .then(() => {
+        setMessage('Tus datos fueron guardados correctamente')
+        setShowFlag('show')
+      })
+      .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {
+        setMessage(
+          'Error: El campo ' +
+            traducir(response.response.data.errors[0].field) +
+            ' ' +
+            traducir(response.response.data.errors[0].defaultMessage)
+        )
+        setShowFlag('show')
+      })
   }
 
   useEffect(() => {
     userService
       .getUser(username!)
-      .then((user : User) => { setUserName(user.username); setPassword(user.password); setFullname(user.fullname); setBusinessName(user.businessName); setBusinessAddress(user.businessAddress); setCuit(user.cuit);})
+      .then((user: User) => {
+        setUserName(user.username)
+        setPassword(user.password)
+        setFullname(user.fullname)
+        setBusinessName(user.businessName)
+        setBusinessAddress(user.businessAddress)
+        setCuit(user.cuit)
+      })
       .catch((error) => navigate(`/error/${error.response.status}`, { replace: true }))
   }, [navigate, username])
 
@@ -69,7 +93,7 @@ const Profile = () => {
       <Col>
         <div className='d-flex flex-column ProfileInfo'>
           <Row>
-            Nombre y Apellido:
+            <b>Nombre y Apellido:</b>
             <FormControl
               type='text'
               defaultValue={getFullname}
@@ -77,7 +101,7 @@ const Profile = () => {
               disabled={!modificando}
               onChange={(event) => setFullname(event.target.value)}
             />
-            Cuit
+            <b>Cuit</b>
             <FormControl
               type='number'
               defaultValue={getCuit}
@@ -85,7 +109,7 @@ const Profile = () => {
               disabled={!modificando}
               onChange={(event) => setCuit(event.target.value)}
             />
-            Nombre del comercio:
+            <b>Nombre del comercio:</b>
             <FormControl
               type='text'
               defaultValue={getBusinessName}
@@ -93,7 +117,7 @@ const Profile = () => {
               disabled={!modificando}
               onChange={(event) => setBusinessName(event.target.value)}
             />
-            Direccion del comercio:
+            <b>Direccion del comercio:</b>
             <FormControl
               type='text'
               defaultValue={getBusinessAddress}
@@ -101,7 +125,7 @@ const Profile = () => {
               disabled={!modificando}
               onChange={(event) => setBusinessAddress(event.target.value)}
             />
-            Contraseña:
+            <b>Contraseña:</b>
             <FormControl
               type='password'
               defaultValue={getPassword}
@@ -110,17 +134,48 @@ const Profile = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
           </Row>
-          </div>
-          </Col>
-          <div className='col LoginButtons'>
-            {modificando ? (
-              <button onClick={() => {setModificando(false); modifiedInformation()}} id='BotonPagarProductos'> {' '} <img alt='' src={Save_Button} />{' '} </button>
-            ) : (
-              <button onClick={() => {setModificando(true)}} id='BotonPagarProductos'> {' '} <img alt='' src={Modify_Button} />{' '} </button>
-            )}
-            <button onClick={() => {}} id='BotonPagarProductos'> {' '} <img alt='' src={PurchasesMade_Button} />{' '} </button>
-          </div>
-        
+        </div>
+      </Col>
+      <div className='col LoginButtons'>
+        {modificando ? (
+          <button
+            onClick={() => {
+              setModificando(false)
+              modifiedInformation()
+            }}
+            id='BotonPagarProductos'
+          >
+            {' '}
+            <img
+              alt=''
+              src={Save_Button}
+            />{' '}
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setModificando(true)
+            }}
+            id='BotonPagarProductos'
+          >
+            {' '}
+            <img
+              alt=''
+              src={Modify_Button}
+            />{' '}
+          </button>
+        )}
+        <button
+          onClick={() => {}}
+          id='BotonPagarProductos'
+        >
+          {' '}
+          <img
+            alt=''
+            src={PurchasesMade_Button}
+          />{' '}
+        </button>
+      </div>
 
       {defaultToastMessage}
     </div>

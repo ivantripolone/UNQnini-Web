@@ -25,6 +25,6 @@ export const traducir = (fieldName: string) => {
         case 'debe coincidir con \"^\\d{10}$\"':
             return 'no puede tener mas de 10 digitos';
         default:
-            return 'Error Field';
+            return fieldName;
     }
 }
