@@ -11,6 +11,7 @@ export const DataProvider = ({ children }: Props) => {
   const [cartContext, setCartContext] = useState<Map<String, CartProduct>>(new Map())
   const [getErrorMessagesForProducts, setErrorMessagesForProducts] = useState('')
   const [logueado, setLogueado] = useState(false)
+  const [username, setUsername] = useState('')
 
   return (
     <DataContext.Provider
@@ -21,6 +22,8 @@ export const DataProvider = ({ children }: Props) => {
         setErrorMessagesForProducts,
         logueado,
         setLogueado,
+        username,
+        setUsername,
       }}
     >
       {children}

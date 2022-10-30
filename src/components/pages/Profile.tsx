@@ -1,9 +1,36 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button, Col, FormControl, Row } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import usericon from '../../assets/usericon.png'
+import { DataContext } from '../../context/DataContext'
+import { SessionContextType } from '../../context/SessionContext'
+import userService from '../../services/userService'
+import { User } from '../../types/user'
 
 const Profile = () => {
+  const { username } = useContext(DataContext) as SessionContextType
+
+  const initialUser = {
+    username: username,
+    password: '',
+    name: '',
+    cuit: 1234,
+    businessName: '',
+    businessAddress: '',
+  }
+
   const [modificando, setModificando] = useState(false)
+  const navigate = useNavigate()
+  const [user, setUser] = useState<User>(initialUser)
+
+  useEffect(() => {
+    userService
+      .getUser(username!)
+      .then((user) => {
+        setUser(user)
+      })
+      .catch((error) => navigate(`/error/${error.response.status}`, { replace: true }))
+  }, [navigate, username])
 
   return (
     <div className='d-flex flex-row ProfilePage'>
@@ -18,7 +45,7 @@ const Profile = () => {
             />
           </Row>
           <Row>
-            <h2>user</h2>
+            <h2>{username}</h2>
           </Row>
         </div>
       </Col>
@@ -27,31 +54,31 @@ const Profile = () => {
           <Row>
             <FormControl
               type='text'
-              placeholder='Nombre y Apellido'
+              defaultValue={user.name}
               plaintext={!modificando}
               disabled={!modificando}
             />
             <FormControl
               type='number'
-              placeholder='CUIT'
+              defaultValue={user.cuit}
               plaintext={!modificando}
               disabled={!modificando}
             />
             <FormControl
               type='text'
-              placeholder='Nombre del comercio'
+              defaultValue={user.businessName}
               plaintext={!modificando}
               disabled={!modificando}
             />
             <FormControl
               type='text'
-              placeholder='Direccion del comercio'
+              defaultValue={user.businessAddress}
               plaintext={!modificando}
               disabled={!modificando}
             />
             <FormControl
               type='password'
-              placeholder='Contraseña'
+              defaultValue={user.password}
               plaintext={!modificando}
               disabled={!modificando}
             />
