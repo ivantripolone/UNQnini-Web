@@ -2,8 +2,8 @@
 export interface User {
     username: string,
     password: string,
-    name: string,
-    cuit: number,
-    businessName:string,
+    fullname: string,
+    cuit: any,
+    businessName: string,
     businessAddress: string
 }
