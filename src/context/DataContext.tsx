@@ -12,6 +12,7 @@ export const DataProvider = ({ children }: Props) => {
   const [getErrorMessagesForProducts, setErrorMessagesForProducts] = useState('')
   const [logueado, setLogueado] = useState(false)
   const [username, setUsername] = useState('')
+  const [message, setMessage] = useState('')
 
   return (
     <DataContext.Provider
@@ -24,6 +25,8 @@ export const DataProvider = ({ children }: Props) => {
         setLogueado,
         username,
         setUsername,
+        message,
+        setMessage
       }}
     >
       {children}
