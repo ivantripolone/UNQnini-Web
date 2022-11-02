@@ -6,7 +6,7 @@ import { CartProduct, CartProductContextType, MessageErrorContextType } from '..
 import Pay_Button from '../../assets/Pay_Button.png'
 import Aplicate_Button from '../../assets/Aplicate_Button.png'
 import TableElement from '.././TableElement'
-import ToastMessage from './ToastMessage'
+import ToastMessage from '../molecules/ToastMessage'
 import couponService from '../../services/couponService'
 
 const Cart = () => {

@@ -1,7 +1,7 @@
 import { FormControl } from 'react-bootstrap'
 import Login_Button from '../../assets/Login_Button.png'
 import Recover_Password_Button from '../../assets/Recover_Password_Button.png'
-import ToastMessage from './ToastMessage'
+import ToastMessage from '../molecules/ToastMessage'
 import { useState, useEffect, useContext } from 'react'
 import { DataContext } from '../../context/DataContext'
 import { SessionContextType } from '../../context/SessionContext'

@@ -5,7 +5,7 @@ import orderService from '../../services/orderService'
 import { OrderCash, Order, OrderCard, OrderCreditCard } from '../../types/order'
 import { DataContext } from '../../context/DataContext'
 import { CartProductContextType } from '../../types/cartProduct'
-import ToastMessage from './ToastMessage'
+import ToastMessage from '../molecules/ToastMessage'
 import { ProductsContextType } from '../../context/ProductsContext'
 import { traducir } from '../extas/Traductor'
 
