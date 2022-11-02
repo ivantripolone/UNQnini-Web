@@ -10,6 +10,7 @@ import { ProductsProvider } from './context/ProductsContext'
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import MyPurchases from './components/pages/MyPurchases'
+import Register from './components/pages/Register'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
               <Route path='/cart' element={<Cart />} />
               <Route path='/purchase' element={<Purchase />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/mypurchases' element={<MyPurchases />} />
               <Route path='/error/:errorId' element={<ErrorPage />} />
