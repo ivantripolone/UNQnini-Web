@@ -54,23 +54,16 @@ const Topbar = () => {
             style={{ cursor: 'pointer' }}
           />
         </Navbar.Collapse>
-        <DropdownButton
-          title={
-            <img
-              src={usericon}
-              width='30'
-              height='30'
-            />
-          }
-        >
-          {logueado ? (
+        <DropdownButton title={<img src={usericon} width='30' height='30' />}>
+          {logueado
+            ?
             <div>
               <Dropdown.Item onClick={() => navigate('/profile')}>Ver Perfil</Dropdown.Item>
               <Dropdown.Item onClick={logout}> Cerrar Sesión </Dropdown.Item>
             </div>
-          ) : (
+            :
             <Dropdown.Item onClick={login}>Iniciar Sesión</Dropdown.Item>
-          )}
+          }
         </DropdownButton>
       </Container>
     </Navbar>

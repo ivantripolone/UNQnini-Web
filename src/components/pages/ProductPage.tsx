@@ -40,35 +40,27 @@ const ProductPage = () => {
 
   return (
     <div className='ProductPageGrid'>
-      <img
-        src={product.pictureUrl}
-        alt={product.name}
-      />
+      <img src={product.pictureUrl} alt={product.name} />
+
       <div className='container-flex'>
         <h1>{product.name}</h1>
         <h2>${product.price}</h2>
         <h2>Seleccione una cantidad</h2>
 
-        <select
-          className='form-select mb-3'
+        <select className='form-select mb-3'
           value={quantitySelected}
           onChange={(event) => setQuantitySelected(parseInt(event.target.value))}
           aria-label='Default select example'
         >
           {[...Array(product.stock)].map((_, i) => (
-            <option
-              key={i + 1}
-              value={`${i + 1}`}
-            >{`${i + 1}`}</option>
+            <option key={i + 1} value={`${i + 1}`}>
+              {`${i + 1}`}
+            </option>
           ))}
         </select>
 
-        <button
-          onClick={() => saveProductInCart(productId!, product.name, quantitySelected, product.price, product.stock)}
-          id='BotonAgregarAlCarrito'
-          type='button'
-          className='btn btn-primary btn-lg'
-        >
+        <button id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'
+          onClick={() => saveProductInCart(productId!, product.name, quantitySelected, product.price, product.stock)}>
           Agregar al carrito
         </button>
 

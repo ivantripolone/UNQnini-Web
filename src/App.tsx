@@ -17,50 +17,16 @@ const App = () => {
       <div className='AppContainer'>
         <BrowserRouter>
           <Routes>
-            <Route
-              path='/'
-              element={<Home />}
-            >
-              <Route
-                index
-                element={
-                  <ProductsProvider>
-                    <Catalog />
-                  </ProductsProvider>
-                }
-              />
-              <Route
-                path='/product/:productId'
-                element={<ProductPage />}
-              />
-              <Route
-                path='/cart'
-                element={<Cart />}
-              />
-              <Route
-                path='/purchase'
-                element={<Purchase />}
-              />
-              <Route
-                path='/login'
-                element={<Login />}
-              />
-              <Route
-                path='/profile'
-                element={<Profile />}
-              />
-              <Route
-                path='/mypurchases'
-                element={<MyPurchases />}
-              />
-              <Route
-                path='/error/:errorId'
-                element={<ErrorPage />}
-              />
-              <Route
-                path='*'
-                element={<ErrorPage />}
-              />
+            <Route path='/' element={<Home />}>
+              <Route index element={<ProductsProvider> <Catalog /> </ProductsProvider>} />
+              <Route path='/product/:productId' element={<ProductPage />} />
+              <Route path='/cart' element={<Cart />} />
+              <Route path='/purchase' element={<Purchase />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/mypurchases' element={<MyPurchases />} />
+              <Route path='/error/:errorId' element={<ErrorPage />} />
+              <Route path='*' element={<ErrorPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

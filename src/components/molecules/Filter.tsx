@@ -19,21 +19,13 @@ const Filter = ({ title, selected, setSelected, productField }: FilterProps) => 
         <select
           className='form-select'
           value={selected}
-          onChange={({ target: { value } }) => {
-            setSelected(value)
-          }}
+          onChange={({ target: { value } }) => { setSelected(value) }}
         >
-          <option
-            key={''}
-            value={''}
-          >
+          <option key={''} value={''}>
             {''}
           </option>
           {Array.from(new Set(allProducts.map(product => productField(product)))).map((element) => (
-            <option
-              key={element}
-              value={element}
-            >
+            <option key={element} value={element}>
               {element}
             </option>
           ))}

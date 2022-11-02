@@ -25,11 +25,7 @@ const Profile = () => {
   const [getShowFlag, setShowFlag] = useState('')
   const [getMessage, setMessage] = useState('')
   const defaultToastMessage = (
-    <ToastMessage
-      getMessage={getMessage}
-      getShowFlag={getShowFlag}
-      setShowFlag={setShowFlag}
-    />
+    <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag} />
   )
 
   const modifiedInformation = () => {
@@ -51,9 +47,9 @@ const Profile = () => {
       .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {
         setMessage(
           'Error: El campo ' +
-            traducir(response.response.data.errors[0].field) +
-            ' ' +
-            traducir(response.response.data.errors[0].defaultMessage)
+          traducir(response.response.data.errors[0].field) +
+          ' ' +
+          traducir(response.response.data.errors[0].defaultMessage)
         )
         setShowFlag('show')
       })
@@ -77,57 +73,43 @@ const Profile = () => {
     <div className='d-flex flex-row ProfilePage'>
       <Col>
         <div className='d-flex flex-column ProfileCard'>
-          <Row>
-            <img
-              src={usericon}
-              width='256'
-              height='256'
-              alt=''
-            />
-          </Row>
-          <Row>
-            <h2 className='d-flex justify-content-center'>{getUserName}</h2>
-          </Row>
+          <Row> <img src={usericon} width='256' height='256' alt='' /> </Row>
+          <Row> <h2 className='d-flex justify-content-center'>{getUserName}</h2> </Row>
         </div>
       </Col>
       <Col>
         <div className='d-flex flex-column ProfileInfo'>
           <Row>
             <b>Nombre y Apellido:</b>
-            <FormControl
-              type='text'
+            <FormControl type='text'
               defaultValue={getFullname}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setFullname(event.target.value)}
             />
             <b>Cuit</b>
-            <FormControl
-              type='number'
+            <FormControl type='number'
               defaultValue={getCuit}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setCuit(event.target.value)}
             />
             <b>Nombre del comercio:</b>
-            <FormControl
-              type='text'
+            <FormControl type='text'
               defaultValue={getBusinessName}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setBusinessName(event.target.value)}
             />
             <b>Direccion del comercio:</b>
-            <FormControl
-              type='text'
+            <FormControl type='text'
               defaultValue={getBusinessAddress}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setBusinessAddress(event.target.value)}
             />
             <b>Contraseña:</b>
-            <FormControl
-              type='password'
+            <FormControl type='password'
               defaultValue={getPassword}
               plaintext={!modificando}
               disabled={!modificando}
@@ -137,45 +119,28 @@ const Profile = () => {
         </div>
       </Col>
       <div className='col LoginButtons'>
-        {modificando ? (
-          <button
+        {modificando
+          ?
+          <button id='BotonPagarProductos'
             onClick={() => {
               setModificando(false)
               modifiedInformation()
-            }}
-            id='BotonPagarProductos'
-          >
+            }}>
             {' '}
-            <img
-              alt=''
-              src={Save_Button}
-            />{' '}
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              setModificando(true)
-            }}
-            id='BotonPagarProductos'
-          >
+            <img alt='' src={Save_Button} />
             {' '}
-            <img
-              alt=''
-              src={Modify_Button}
-            />{' '}
           </button>
-        )}
-        <button
-          onClick={() => {
-            navigate('/mypurchases')
-          }}
-          id='BotonPagarProductos'
-        >
+          :
+          <button id='BotonPagarProductos' onClick={() => setModificando(true)}>
+            {' '}
+            <img alt='' src={Modify_Button} />
+            {' '}
+          </button>
+        }
+        <button id='BotonPagarProductos' onClick={() => navigate('/mypurchases')}>
           {' '}
-          <img
-            alt=''
-            src={PurchasesMade_Button}
-          />{' '}
+          <img alt='' src={PurchasesMade_Button} />
+          {' '}
         </button>
       </div>
 

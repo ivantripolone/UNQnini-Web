@@ -20,11 +20,7 @@ const Login = () => {
     'Bienvenido a UNQNINI WEB, ingrese Usuario y Contraseña para iniciar sesión'
   )
   const defaultToastMessage = (
-    <ToastMessage
-      getMessage={getMessage}
-      getShowFlag={getShowFlag}
-      setShowFlag={setShowFlag}
-    />
+    <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag} />
   )
   const navigate = useNavigate()
 
@@ -62,9 +58,9 @@ const Login = () => {
         setShowFlag('show')
         setMessage(
           'Error: El dato ingresado en el campo ' +
-            traducir(response.response.data.errors[0].field) +
-            ' ' +
-            response.response.data.errors[0].defaultMessage
+          traducir(response.response.data.errors[0].field) +
+          ' ' +
+          response.response.data.errors[0].defaultMessage
         )
       })
   }
@@ -77,41 +73,25 @@ const Login = () => {
     <div className='d-flex flex-column LoginTableContainer'>
       <div className='row'>
         <div className='col LoginForms'>
-          <FormControl
-            className='UserNameCase'
-            style={{ width: '80%' }}
-            type='text'
+          <FormControl className='UserNameCase' style={{ width: '80%' }} type='text'
             placeholder='Usuario'
             onChange={(event) => setUserName(event.target.value)}
           />
-          <FormControl
-            className='PasswordCase'
-            style={{ width: '80%' }}
-            type='password'
+          <FormControl className='PasswordCase' style={{ width: '80%' }} type='password'
             placeholder='Contraseña'
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
         <div className='col LoginButtons'>
-          <button
-            onClick={() => login()}
-            id='BotonPagarProductos'
-          >
+          <button onClick={() => login()} id='BotonPagarProductos'>
             {' '}
-            <img
-              alt=''
-              src={Login_Button}
-            />{' '}
+            <img alt='' src={Login_Button} />
+            {' '}
           </button>
-          <button
-            onClick={() => recoverPassword()}
-            id='BotonPagarProductos'
-          >
+          <button onClick={() => recoverPassword()} id='BotonPagarProductos'>
             {' '}
-            <img
-              alt=''
-              src={Recover_Password_Button}
-            />{' '}
+            <img alt='' src={Recover_Password_Button} />
+            {' '}
           </button>
         </div>
       </div>

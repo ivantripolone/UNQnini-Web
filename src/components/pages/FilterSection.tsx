@@ -5,14 +5,8 @@ import { Product } from '../../types/product'
 import Filter from '../molecules/Filter'
 
 const sortOptions = [
-  {
-    value: 'PRICE_ASC',
-    display: 'Menor precio',
-  },
-  {
-    value: 'PRICE_DESC',
-    display: 'Mayor precio',
-  },
+  { value: 'PRICE_ASC', display: 'Menor precio' },
+  { value: 'PRICE_DESC', display: 'Mayor precio' },
 ] as { value: string; display: string }[]
 
 const FilterSection = () => {
@@ -79,21 +73,13 @@ const FilterSection = () => {
             <select
               className='form-select'
               value={selectedSort}
-              onChange={({ target: { value } }) => {
-                setSelectedSort(value)
-              }}
+              onChange={({ target: { value } }) => { setSelectedSort(value) }}
             >
-              <option
-                key={''}
-                value={''}
-              >
+              <option key={''} value={''}>
                 {''}
               </option>
               {sortOptions.map((option) => (
-                <option
-                  key={option.value}
-                  value={option.value}
-                >
+                <option key={option.value} value={option.value}>
                   {option.display}
                 </option>
               ))}
@@ -107,9 +93,7 @@ const FilterSection = () => {
               type='text'
               placeholder='Nombre...'
               value={selectedSearch}
-              onChange={({ target: { value } }) => {
-                setSelectedSearch(value)
-              }}
+              onChange={({ target: { value } }) => { setSelectedSearch(value) }}
             />
           </div>
         </div>

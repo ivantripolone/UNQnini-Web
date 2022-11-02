@@ -11,14 +11,14 @@ import couponService from '../../services/couponService'
 
 const Cart = () => {
   const { cartContext } = useContext(DataContext) as CartProductContextType
-  const { getErrorMessagesForProducts , setErrorMessagesForProducts} = useContext(DataContext) as MessageErrorContextType
+  const { getErrorMessagesForProducts, setErrorMessagesForProducts } = useContext(DataContext) as MessageErrorContextType
   const [getDiscount, setDiscount] = useState(0)
-  const [ getLocalCoupon, setLocalCoupon ] = useState('')
+  const [getLocalCoupon, setLocalCoupon] = useState('')
   const [getShowFlag, setShowFlag] = useState('')
   const [getMessage, setMessage] = useState((getErrorMessagesForProducts === '') ? 'Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados' : getErrorMessagesForProducts)
-  const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag}/>
+  const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag} />
   const navigate = useNavigate()
-  
+
   const products: CartProduct[] = []
   let total = 0
 
@@ -40,36 +40,30 @@ const Cart = () => {
     navigate('/purchase')
   }
 
-  const applyCoupon  = () => {
-    couponService.postCoupon({codename: getLocalCoupon})
-                  .then((response: { data: SetStateAction<number> }) => { setShowFlag('show'); setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data)})
-                  .catch((error: { response: { data: { message: string } } }) => { setShowFlag('show'); setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message)})
+  const applyCoupon = () => {
+    couponService.postCoupon({ codename: getLocalCoupon })
+      .then((response: { data: SetStateAction<number> }) => { setShowFlag('show'); setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data) })
+      .catch((error: { response: { data: { message: string } } }) => { setShowFlag('show'); setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message) })
   }
-  
+
 
   const totalToPay = (
     <div style={{ padding: '15px' }}>
       <h3>Total: ${total - (total * (getDiscount / 100))}</h3>
-        <div className='CuponSection'>
-            <FormControl
-                  style={{ width: '40%' }}
-                  type='text'
-                  placeholder='Ingrese su cupon de descuento'
-                  onChange={(event) => setLocalCoupon(event.target.value)}
-            /> 
-            <button onClick={() => {applyCoupon()}} id='BotonPagarProductos' > <img alt=''src={Aplicate_Button} /> </button>
-        </div>
-      
-      
-      
-      <button
-        onClick={() => {handleClick(); setErrorMessagesForProducts('')}}
-        id='BotonPagarProductos'
-      >
-        <img
-          alt=''
-          src={Pay_Button}
+      <div className='CuponSection'>
+        <FormControl
+          style={{ width: '40%' }}
+          type='text'
+          placeholder='Ingrese su cupon de descuento'
+          onChange={(event) => setLocalCoupon(event.target.value)}
         />
+        <button onClick={() => { applyCoupon() }} id='BotonPagarProductos'> <img alt='' src={Aplicate_Button} /> </button>
+      </div>
+
+
+
+      <button onClick={() => { handleClick(); setErrorMessagesForProducts('') }} id='BotonPagarProductos'>
+        <img alt='' src={Pay_Button} />
       </button>
     </div>
   )
