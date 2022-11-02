@@ -126,21 +126,15 @@ const Profile = () => {
               setModificando(false)
               modifiedInformation()
             }}>
-            {' '}
             <img alt='' src={Save_Button} />
-            {' '}
           </button>
           :
           <button id='BotonPagarProductos' onClick={() => setModificando(true)}>
-            {' '}
             <img alt='' src={Modify_Button} />
-            {' '}
           </button>
         }
         <button id='BotonPagarProductos' onClick={() => navigate('/mypurchases')}>
-          {' '}
           <img alt='' src={PurchasesMade_Button} />
-          {' '}
         </button>
       </div>
 

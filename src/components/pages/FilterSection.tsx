@@ -75,9 +75,7 @@ const FilterSection = () => {
               value={selectedSort}
               onChange={({ target: { value } }) => { setSelectedSort(value) }}
             >
-              <option key={''} value={''}>
-                {''}
-              </option>
+              <option key={''} value={''} />
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.display}

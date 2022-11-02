@@ -84,14 +84,10 @@ const Login = () => {
         </div>
         <div className='col LoginButtons'>
           <button onClick={() => login()} id='BotonPagarProductos'>
-            {' '}
             <img alt='' src={Login_Button} />
-            {' '}
           </button>
           <button onClick={() => recoverPassword()} id='BotonPagarProductos'>
-            {' '}
             <img alt='' src={Recover_Password_Button} />
-            {' '}
           </button>
         </div>
       </div>

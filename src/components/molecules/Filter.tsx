@@ -21,9 +21,7 @@ const Filter = ({ title, selected, setSelected, productField }: FilterProps) => 
           value={selected}
           onChange={({ target: { value } }) => { setSelected(value) }}
         >
-          <option key={''} value={''}>
-            {''}
-          </option>
+          <option key={''} value={''}></option>
           {Array.from(new Set(allProducts.map(product => productField(product)))).map((element) => (
             <option key={element} value={element}>
               {element}
