@@ -6,17 +6,15 @@ import { CartProduct, CartProductContextType, MessageErrorContextType } from '..
 import Pay_Button from '../../assets/Pay_Button.png'
 import Aplicate_Button from '../../assets/Aplicate_Button.png'
 import TableElement from '.././TableElement'
-import ToastMessage from './ToastMessage'
 import couponService from '../../services/couponService'
+import { ToastContextType } from '../../context/ToastContext'
 
 const Cart = () => {
   const { cartContext } = useContext(DataContext) as CartProductContextType
+  const { setMessage } = useContext(DataContext) as ToastContextType
   const { getErrorMessagesForProducts, setErrorMessagesForProducts } = useContext(DataContext) as MessageErrorContextType
   const [getDiscount, setDiscount] = useState(0)
   const [getLocalCoupon, setLocalCoupon] = useState('')
-  const [getShowFlag, setShowFlag] = useState('')
-  const [getMessage, setMessage] = useState((getErrorMessagesForProducts === '') ? 'Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados' : getErrorMessagesForProducts)
-  const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag} />
   const navigate = useNavigate()
 
   const products: CartProduct[] = []
@@ -42,8 +40,8 @@ const Cart = () => {
 
   const applyCoupon = () => {
     couponService.postCoupon({ codename: getLocalCoupon })
-      .then((response: { data: SetStateAction<number> }) => { setShowFlag('show'); setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data) })
-      .catch((error: { response: { data: { message: string } } }) => { setShowFlag('show'); setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message) })
+      .then((response: { data: SetStateAction<number> }) => { setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data) })
+      .catch((error: { response: { data: { message: string } } }) => { setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message) })
   }
 
 
@@ -68,7 +66,10 @@ const Cart = () => {
     </div>
   )
 
-  useEffect(() => { setShowFlag('show') }, [getMessage])
+  useEffect(() => setMessage((
+    getErrorMessagesForProducts === '') ?
+    'Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados'
+    : getErrorMessagesForProducts))
 
   return (
     <div className='d-flex flex-column ProductTableContainer'>
@@ -83,7 +84,6 @@ const Cart = () => {
         <tbody>{tableElements}</tbody>
       </Table>
       {totalToPay}
-      {defaultToastMessage}
     </div>
   )
 }

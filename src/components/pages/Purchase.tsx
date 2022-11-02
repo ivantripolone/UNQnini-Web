@@ -5,13 +5,14 @@ import orderService from '../../services/orderService'
 import { OrderCash, Order, OrderCard, OrderCreditCard } from '../../types/order'
 import { DataContext } from '../../context/DataContext'
 import { CartProductContextType } from '../../types/cartProduct'
-import ToastMessage from './ToastMessage'
 import { ProductsContextType } from '../../context/ProductsContext'
 import { traducir } from '../extas/Traductor'
+import { ToastContextType } from '../../context/ToastContext'
 
 const Purchase = () => {
   const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
   const { discount } = useContext(DataContext) as ProductsContextType
+  const { setMessage } = useContext(DataContext) as ToastContextType
   const [getBuyerName, setBuyerName] = useState('')
   const [getBusinessName, setBusinessName] = useState('')
   const [getCuit, setCuit] = useState('')
@@ -27,9 +28,6 @@ const Purchase = () => {
   const [getAmountOfPayments, setAmountOfPayments] = useState('1')
   const [getCardExpirationMounth, setCardExpirationMounth] = useState('')
   const [getCardExpirationYear, setCardExpirationYear] = useState('')
-  const [getShowFlag, setShowFlag] = useState('')
-  const [getMessage, setMessage] = useState('Bienvenido a la sección de pago, ingrese todos los datos solicitados.')
-  const defaultToastMessage = <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag} />
 
   const concludePurchase = () => {
 
@@ -51,7 +49,7 @@ const Purchase = () => {
       }
 
       orderService.postOrderCash(Object.assign({}, order, orderCash) as OrderCash)
-        .then(() => { setShowFlag('show'); setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+        .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
         .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage) })
     } else {
       const orderCard = {
@@ -63,19 +61,18 @@ const Purchase = () => {
 
       if (getPaymentType === 'Tarjeta de Crédito') {
         orderService.postOrderCreditCard(Object.assign({}, order, orderCard, { amountOfPayments: getAmountOfPayments }) as OrderCreditCard)
-          .then(() => { setShowFlag('show'); setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+          .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
           .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage) })
       } else {
         orderService.postOrderDebitCard(Object.assign({}, order, orderCard) as OrderCard)
-          .then(() => { setShowFlag('show'); setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
+          .then(() => { setMessage('Tu pedido fue realizado correctamente.'); setCartContext(new Map()) })
           .catch((response: { response: { data: { errors: { field: string, defaultMessage: string }[] } } }) => { setMessage('Tu pedido no pudo ser concretado, hubo un problema: El campo ' + traducir(response.response.data.errors[0].field) + ' ' + response.response.data.errors[0].defaultMessage) })
       }
     }
-    console.log(getBusinessName)
   }
 
-  useEffect(() => { setShowFlag('show') }, [getMessage])
 
+  useEffect(() => setMessage('Bienvenido a la sección de pago, ingrese todos los datos solicitados.'))
 
   return (
     <div className='PurchasePage'>
@@ -234,7 +231,6 @@ const Purchase = () => {
         </PurchaseSection>
         <button className="align-self-center bg-light d-flex flex-column" disabled={cartContext.size === 0} onClick={() => concludePurchase()} id='BotonPagar'>Finalizar Compra</button>
       </div>
-      {defaultToastMessage}
     </div>
   )
 }
