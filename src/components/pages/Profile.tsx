@@ -6,14 +6,15 @@ import { DataContext } from '../../context/DataContext'
 import { SessionContextType } from '../../context/SessionContext'
 import userService from '../../services/userService'
 import { User } from '../../types/user'
-import ToastMessage from '../molecules/ToastMessage'
 import { traducir } from '../extas/Traductor'
 import Save_Button from '../../assets/Save_Button.png'
 import Modify_Button from '../../assets/Modify_Button.png'
 import PurchasesMade_Button from '../../assets/PurchasesMade_Button.png'
+import { ToastContextType } from '../../context/ToastContext'
 
 const Profile = () => {
   const { username } = useContext(DataContext) as SessionContextType
+  const { setMessage } = useContext(DataContext) as ToastContextType
   const [modificando, setModificando] = useState(false)
   const navigate = useNavigate()
   const [getUserName, setUserName] = useState('')
@@ -22,11 +23,6 @@ const Profile = () => {
   const [getBusinessName, setBusinessName] = useState('')
   const [getBusinessAddress, setBusinessAddress] = useState('')
   const [getCuit, setCuit] = useState('')
-  const [getShowFlag, setShowFlag] = useState('')
-  const [getMessage, setMessage] = useState('')
-  const defaultToastMessage = (
-    <ToastMessage getMessage={getMessage} getShowFlag={getShowFlag} setShowFlag={setShowFlag} />
-  )
 
   const modifiedInformation = () => {
     const userModified: User = {
@@ -42,7 +38,6 @@ const Profile = () => {
       .postModifiedInformation(userModified)
       .then(() => {
         setMessage('Tus datos fueron guardados correctamente')
-        setShowFlag('show')
       })
       .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {
         setMessage(
@@ -51,7 +46,6 @@ const Profile = () => {
           ' ' +
           traducir(response.response.data.errors[0].defaultMessage)
         )
-        setShowFlag('show')
       })
   }
 
@@ -137,8 +131,6 @@ const Profile = () => {
           <img alt='' src={PurchasesMade_Button} />
         </button>
       </div>
-
-      {defaultToastMessage}
     </div>
   )
 }
