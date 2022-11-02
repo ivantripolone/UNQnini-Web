@@ -28,6 +28,10 @@ const Topbar = () => {
     navigate('/')
   }
 
+  const register = () => {
+    navigate('/register')
+  }
+
   return (
     <Navbar bg='nav'>
       <Container>
@@ -62,7 +66,10 @@ const Topbar = () => {
               <Dropdown.Item onClick={logout}> Cerrar Sesión </Dropdown.Item>
             </div>
             :
-            <Dropdown.Item onClick={login}>Iniciar Sesión</Dropdown.Item>
+            <div>
+              <Dropdown.Item onClick={login}>Iniciar Sesión</Dropdown.Item>
+              <Dropdown.Item onClick={register}>Registrarse</Dropdown.Item>
+            </div>
           }
         </DropdownButton>
       </Container>
