@@ -5,5 +5,6 @@ export interface User {
     fullname: string,
     cuit: any,
     businessName: string,
-    businessAddress: string
+    businessAddress: string,
+    pictureUrl: string
 }

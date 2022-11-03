@@ -20,6 +20,7 @@ const Register = () => {
     const [cuit, setCuit] = useState('')
     const [businessName, setBusinessName] = useState('')
     const [businessAddress, setBusinessAddress] = useState('')
+    const [pictureUrl, setPictureUrl] = useState('')
 
     const registerData: User = {
         username: username,
@@ -27,28 +28,27 @@ const Register = () => {
         fullname: fullname,
         cuit: cuit,
         businessName: businessName,
-        businessAddress: businessAddress
+        businessAddress: businessAddress,
+        pictureUrl: pictureUrl
     }
 
     const register = () => {
-        console.log(registerData)
         userService.postRegister(registerData)
             .then(() => {
-                setUsername(username)
                 setLogueado(true)
+                setUsername(username)
+
                 navigate('/')
             })
-        /*
-        .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {
-            setMessage(
-                'Error: El dato ingresado en el campo ' +
-                traducir(response.response.data.errors[0].field) +
-                ' ' +
-                response.response.data.errors[0].defaultMessage
-            )
+            .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {
+                setMessage(
+                    'Error: El dato ingresado en el campo ' +
+                    traducir(response.response.data.errors[0].field) +
+                    ' ' +
+                    response.response.data.errors[0].defaultMessage
+                )
 
-        })
-        */
+            })
     }
 
     useEffect(() => { if (logueado) navigate('/') })
@@ -69,7 +69,8 @@ const Register = () => {
                         onChange={(event) => setBusinessName(event.target.value)} />
                     <FormControl type='text' placeholder='Dirección del comercio'
                         onChange={(event) => setBusinessAddress(event.target.value)} />
-                    <FormControl type='text' placeholder='URL de Imagen' />
+                    <FormControl type='text' placeholder='URL de Imagen'
+                        onChange={(event) => setPictureUrl(event.target.value)} />
                 </FormGroup>
             </div>
             <div className='registerButton'>
