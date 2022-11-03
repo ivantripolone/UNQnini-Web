@@ -11,10 +11,10 @@ import { traducir } from '../extas/Traductor'
 
 const Register = () => {
 
-    const { logueado, setLogueado } = useContext(DataContext) as SessionContextType
+    const { logueado, setLogueado, setUsername } = useContext(DataContext) as SessionContextType
     const { setMessage } = useContext(DataContext) as ToastContextType
     const navigate = useNavigate()
-    const [username, setUsername] = useState('')
+    const [username, setUsernameField] = useState('')
     const [password, setPassword] = useState('')
     const [fullname, setFullname] = useState('')
     const [cuit, setCuit] = useState('')
@@ -34,6 +34,7 @@ const Register = () => {
         console.log(registerData)
         userService.postRegister(registerData)
             .then(() => {
+                setUsername(username)
                 setLogueado(true)
                 navigate('/')
             })
@@ -57,7 +58,7 @@ const Register = () => {
             <div className='registerFields'>
                 <FormGroup >
                     <FormControl type='text' placeholder='Nombre de usuario'
-                        onChange={(event) => setUsername(event.target.value)} />
+                        onChange={(event) => setUsernameField(event.target.value)} />
                     <FormControl type='password' placeholder='Contraseña'
                         onChange={(event) => setPassword(event.target.value)} />
                     <FormControl type='text' placeholder='Nombre y Apellido'
