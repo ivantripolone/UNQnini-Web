@@ -23,6 +23,7 @@ const Profile = () => {
   const [getBusinessName, setBusinessName] = useState('')
   const [getBusinessAddress, setBusinessAddress] = useState('')
   const [getCuit, setCuit] = useState('')
+  const [getPictureUrl, setPictureUrl] = useState('')
 
   const modifiedInformation = () => {
     const userModified: User = {
@@ -32,6 +33,7 @@ const Profile = () => {
       cuit: getCuit,
       businessName: getBusinessName,
       businessAddress: getBusinessAddress,
+      pictureUrl: getPictureUrl
     }
 
     userService
@@ -59,6 +61,7 @@ const Profile = () => {
         setBusinessName(user.businessName)
         setBusinessAddress(user.businessAddress)
         setCuit(user.cuit)
+        setPictureUrl(user.pictureUrl)
       })
       .catch((error) => navigate(`/error/${error.response.status}`, { replace: true }))
   }, [navigate, username])
@@ -76,35 +79,35 @@ const Profile = () => {
           <Row>
             <b>Nombre y Apellido:</b>
             <FormControl type='text'
-              defaultValue={getFullname}
+              value={getFullname}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setFullname(event.target.value)}
             />
             <b>Cuit</b>
             <FormControl type='number'
-              defaultValue={getCuit}
+              value={getCuit}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setCuit(event.target.value)}
             />
             <b>Nombre del comercio:</b>
             <FormControl type='text'
-              defaultValue={getBusinessName}
+              value={getBusinessName}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setBusinessName(event.target.value)}
             />
             <b>Direccion del comercio:</b>
             <FormControl type='text'
-              defaultValue={getBusinessAddress}
+              value={getBusinessAddress}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setBusinessAddress(event.target.value)}
             />
             <b>Contraseña:</b>
             <FormControl type='password'
-              defaultValue={getPassword}
+              value={getPassword}
               plaintext={!modificando}
               disabled={!modificando}
               onChange={(event) => setPassword(event.target.value)}
