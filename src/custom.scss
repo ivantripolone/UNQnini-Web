@@ -26,6 +26,16 @@ $theme-colors: (
     outline: none;
 }
 
+#BotonRegistrarse {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    padding-top: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 .AppContainer {
     background: #832c1b;
     min-height: 100vh;
@@ -141,6 +151,24 @@ $theme-colors: (
     display: flex;
     align-content: center;
     margin-right: 20px;
+}
+
+.registerContainer {
+    display: flex;
+    margin: 120px;
+    background-color: #ded4d4;
+}
+
+.registerFields {
+    display: flex;
+    margin: 20px;
+    align-self: center;
+}
+
+.registerButton {
+    display: flex;
+    align-self: center;
+    margin-bottom: 10px;
 }
 
 @import "~bootstrap/scss/bootstrap";
