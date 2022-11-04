@@ -3,6 +3,11 @@ $theme-colors: (
     "nav": #ddd3d2
 );
 
+#claimSelect {
+    display: flex;
+    margin-bottom: 30px;
+}
+
 #BotonAgregarAlCarrito {
     background-color: #ded4d4;
 }
