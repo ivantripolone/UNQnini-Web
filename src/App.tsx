@@ -11,6 +11,7 @@ import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import MyPurchases from './components/pages/MyPurchases'
 import Register from './components/pages/Register'
+import Claim from './components/pages/Claim'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
               <Route path='/register' element={<Register />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/mypurchases' element={<MyPurchases />} />
+              <Route path='/claim' element={<Claim />} />
               <Route path='/error/:errorId' element={<ErrorPage />} />
               <Route path='*' element={<ErrorPage />} />
             </Route>

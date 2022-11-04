@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
-import { CartProduct, CartProductContextType } from '../types/cartProduct'
-import Delete_Button from '../../src/assets/Delete_Button.png'
-import { DataContext } from '../context/DataContext'
+import { CartProduct, CartProductContextType } from '../../types/cartProduct'
+import Delete_Button from '../../../src/assets/Delete_Button.png'
+import { DataContext } from '../../context/DataContext'
 
 
-const TableElement = ({id, title, quantity, price, stock} : CartProduct) => {
+const CartTableElement = ({id, title, quantity, price, stock} : CartProduct) => {
     const { cartContext , setCartContext } = useContext(DataContext) as CartProductContextType
     const [quantitySelected, setQuantitySelected]= useState<number>(quantity as number)
 
@@ -17,7 +17,6 @@ const TableElement = ({id, title, quantity, price, stock} : CartProduct) => {
         const cartProduct = { id: id, title: title, quantity: quantitySelected, price: price, stock : stock } as CartProduct
         cartContext.set(id, cartProduct)
         setCartContext(new Map(cartContext))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [quantitySelected])
 
     return(
@@ -33,4 +32,4 @@ const TableElement = ({id, title, quantity, price, stock} : CartProduct) => {
         </tr>)
 }
 
-export default TableElement
+export default CartTableElement

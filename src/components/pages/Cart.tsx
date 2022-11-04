@@ -5,7 +5,7 @@ import { DataContext } from '../../context/DataContext'
 import { CartProduct, CartProductContextType } from '../../types/cartProduct'
 import Pay_Button from '../../assets/Pay_Button.png'
 import Aplicate_Button from '../../assets/Aplicate_Button.png'
-import TableElement from '.././TableElement'
+import CartTableElement from '../extas/CartTableElement'
 import couponService from '../../services/couponService'
 import { ToastContextType } from '../../context/ToastContext'
 
@@ -26,7 +26,7 @@ const Cart = () => {
 
   const tableElements = products.map((product: CartProduct) => {
     return (
-      <TableElement
+      <CartTableElement
         key={`TableElementKey_${product.id}`}
         {...product}
       />
