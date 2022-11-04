@@ -41,6 +41,17 @@ $theme-colors: (
     outline: none;
 }
 
+#BotonReclamo {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 .AppContainer {
     background: #832c1b;
     min-height: 100vh;
@@ -174,6 +185,18 @@ $theme-colors: (
     display: flex;
     align-self: center;
     margin-bottom: 10px;
+}
+
+.claimContainer {
+    display: flex;
+    align-self: center;
+    background-color: #ded4d4;
+    margin: 120px;
+}
+
+.claimButton {
+    display: flex;
+    align-self: center;
 }
 
 @import "~bootstrap/scss/bootstrap";
