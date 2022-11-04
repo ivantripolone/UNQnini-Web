@@ -1,8 +1,8 @@
-import { SetStateAction, useContext, useEffect, useState } from 'react'
+import { SetStateAction, useContext, useState } from 'react'
 import { FormControl, Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
-import { CartProduct, CartProductContextType, MessageErrorContextType } from '../../types/cartProduct'
+import { CartProduct, CartProductContextType } from '../../types/cartProduct'
 import Pay_Button from '../../assets/Pay_Button.png'
 import Aplicate_Button from '../../assets/Aplicate_Button.png'
 import TableElement from '.././TableElement'
@@ -12,7 +12,6 @@ import { ToastContextType } from '../../context/ToastContext'
 const Cart = () => {
   const { cartContext } = useContext(DataContext) as CartProductContextType
   const { setMessage } = useContext(DataContext) as ToastContextType
-  const { getErrorMessagesForProducts, setErrorMessagesForProducts } = useContext(DataContext) as MessageErrorContextType
   const [getDiscount, setDiscount] = useState(0)
   const [getLocalCoupon, setLocalCoupon] = useState('')
   const navigate = useNavigate()
@@ -35,6 +34,7 @@ const Cart = () => {
   })
 
   const handleClick = () => {
+    setMessage('')
     navigate('/purchase')
   }
 
@@ -60,16 +60,11 @@ const Cart = () => {
 
 
 
-      <button onClick={() => { handleClick(); setErrorMessagesForProducts('') }} id='BotonPagarProductos'>
+      <button onClick={() => { handleClick() }} id='BotonPagarProductos'>
         <img alt='' src={Pay_Button} />
       </button>
     </div>
   )
-
-  useEffect(() => setMessage((
-    getErrorMessagesForProducts === '') ?
-    'Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados'
-    : getErrorMessagesForProducts))
 
   return (
     <div className='d-flex flex-column ProductTableContainer'>

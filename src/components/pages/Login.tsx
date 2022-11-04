@@ -44,6 +44,7 @@ const Login = () => {
       .then((response: { data: { areTheUserDetailsCorrect: boolean } }) => {
         setLogueado(response.data.areTheUserDetailsCorrect)
         setUsername(getUserName)
+        setMessage('')
         navigate('/')
       })
       .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {

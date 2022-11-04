@@ -63,7 +63,10 @@ const Profile = () => {
         setCuit(user.cuit)
         setPictureUrl(user.pictureUrl)
       })
-      .catch((error) => navigate(`/error/${error.response.status}`, { replace: true }))
+      .catch((error) => {
+        setMessage('')
+        navigate(`/error/${error.response.status}`, { replace: true })
+      })
   }, [navigate, username])
 
   return (
@@ -130,7 +133,10 @@ const Profile = () => {
             <img alt='' src={Modify_Button} />
           </button>
         }
-        <button id='BotonPagarProductos' onClick={() => navigate('/mypurchases')}>
+        <button id='BotonPagarProductos' onClick={() => {
+          setMessage('')
+          navigate('/mypurchases')
+        }}>
           <img alt='' src={PurchasesMade_Button} />
         </button>
       </div>

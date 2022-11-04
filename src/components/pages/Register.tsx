@@ -38,6 +38,7 @@ const Register = () => {
                 setLogueado(true)
                 setUsername(username)
 
+                setMessage('')
                 navigate('/')
             })
             .catch((response: { response: { data: { errors: { field: string; defaultMessage: string }[] } } }) => {
@@ -45,7 +46,7 @@ const Register = () => {
                     'Error: El dato ingresado en el campo ' +
                     traducir(response.response.data.errors[0].field) +
                     ' ' +
-                    response.response.data.errors[0].defaultMessage
+                    traducir(response.response.data.errors[0].defaultMessage)
                 )
 
             })

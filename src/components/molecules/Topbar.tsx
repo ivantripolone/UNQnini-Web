@@ -6,30 +6,42 @@ import usericon from '../../assets/usericon.png'
 import { useContext } from 'react'
 import { DataContext } from '../../context/DataContext'
 import { SessionContextType } from '../../context/SessionContext'
+import { ToastContextType } from '../../context/ToastContext'
 
 const Topbar = () => {
   const navigate = useNavigate()
   const { logueado, setLogueado } = useContext(DataContext) as SessionContextType
+  const { setMessage } = useContext(DataContext) as ToastContextType
 
   const handleClick = () => {
+    setMessage('')
     navigate('/')
   }
 
   const handleCartClick = () => {
+    setMessage('Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados')
     navigate('/cart')
   }
 
   const login = () => {
+    setMessage('')
     navigate('/login')
   }
 
   const logout = () => {
     setLogueado(false)
+    setMessage('')
     navigate('/')
   }
 
   const register = () => {
+    setMessage('')
     navigate('/register')
+  }
+
+  const profile = () => {
+    setMessage('')
+    navigate('/profile')
   }
 
   return (
@@ -62,7 +74,7 @@ const Topbar = () => {
           {logueado
             ?
             <div>
-              <Dropdown.Item onClick={() => navigate('/profile')}>Ver Perfil</Dropdown.Item>
+              <Dropdown.Item onClick={profile}>Ver Perfil</Dropdown.Item>
               <Dropdown.Item onClick={logout}> Cerrar Sesión </Dropdown.Item>
             </div>
             :

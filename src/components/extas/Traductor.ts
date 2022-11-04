@@ -23,7 +23,9 @@ export const traducir = (fieldName: string) => {
         case 'debe coincidir con \"^[a-zA-Z ]*$\"':
             return 'solo puede contener letras';
         case 'debe coincidir con \"^\\d{10}$\"':
-            return 'no puede tener mas de 10 digitos';
+            return 'debe contar con 10 digitos';
+        case 'debe coincidir con \"^[1-9]*$\"':
+            return 'no puede contener ceros';
         default:
             return fieldName;
     }
