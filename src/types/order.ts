@@ -1,4 +1,5 @@
 export interface Order {
+    username: string
     buyerName: string
     businessName: string
     cuit: string
@@ -6,7 +7,8 @@ export interface Order {
     isByHomeDelivery: boolean
     deliveryAddress: string
     products: { [k: string]: number }
-    coupon: number
+    discount: number
+    total: number
 }
 
 export interface OrderCash extends Order {

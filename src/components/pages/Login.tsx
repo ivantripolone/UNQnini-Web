@@ -5,11 +5,11 @@ import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../../context/DataContext'
 import { SessionContextType } from '../../context/SessionContext'
 import { LoginData } from '../../types/loginData'
-import { RecoverPasswordData } from '../../types/recoverPasswordData'
 import { traducir } from '../extas/Traductor'
 import loginService from '../../services/loginService'
 import { useNavigate } from 'react-router-dom'
 import { ToastContextType } from '../../context/ToastContext'
+import { Username } from '../../types/username'
 
 const Login = () => {
   const { setLogueado, setUsername } = useContext(DataContext) as SessionContextType
@@ -23,8 +23,8 @@ const Login = () => {
     password: getPassword,
   }
 
-  const recoverPasswordData: RecoverPasswordData = {
-    userName: getUserName,
+  const recoverPasswordData: Username = {
+    username: getUserName
   }
 
   const recoverPassword = () => {

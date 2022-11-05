@@ -1,7 +1,7 @@
 import { SetStateAction, useContext, useState } from 'react'
 import { FormControl, Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { DataContext } from '../../context/DataContext'
+import { CartContextType, DataContext } from '../../context/DataContext'
 import { CartProduct, CartProductContextType } from '../../types/cartProduct'
 import Pay_Button from '../../assets/Pay_Button.png'
 import Aplicate_Button from '../../assets/Aplicate_Button.png'
@@ -11,8 +11,9 @@ import { ToastContextType } from '../../context/ToastContext'
 
 const Cart = () => {
   const { cartContext } = useContext(DataContext) as CartProductContextType
+  const { setTotal, setDiscount } = useContext(DataContext) as CartContextType
   const { setMessage } = useContext(DataContext) as ToastContextType
-  const [getDiscount, setDiscount] = useState(0)
+  const [getLocalDiscount, setLocalDiscount] = useState(0)
   const [getLocalCoupon, setLocalCoupon] = useState('')
   const navigate = useNavigate()
 
@@ -35,19 +36,21 @@ const Cart = () => {
 
   const handleClick = () => {
     setMessage('')
+    setDiscount(getLocalDiscount)
+    setTotal(total)
     navigate('/purchase')
   }
 
   const applyCoupon = () => {
     couponService.postCoupon({ codename: getLocalCoupon })
-      .then((response: { data: SetStateAction<number> }) => { setMessage('Tu cupon se aplico correctamente.'); setDiscount(response.data) })
+      .then((response: { data: SetStateAction<number> }) => { setMessage('Tu cupon se aplico correctamente.'); setLocalDiscount(response.data) })
       .catch((error: { response: { data: { message: string } } }) => { setMessage('Error: El cupon no fue aplicado: ' + error.response.data.message) })
   }
 
 
   const totalToPay = (
     <div style={{ padding: '15px' }}>
-      <h3>Total: ${total - (total * (getDiscount / 100))}</h3>
+      <h3>Total: ${total - (total * (getLocalDiscount / 100))}</h3>
       <div className='CuponSection'>
         <FormControl
           style={{ width: '40%' }}
