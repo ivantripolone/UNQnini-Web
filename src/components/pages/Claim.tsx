@@ -1,20 +1,19 @@
 import { useState, useContext } from 'react'
 import Send_Button from '../../assets/Send_Button.png'
 import Send_Disabled_Button from '../../assets/Send_Disabled_Button.png'
-import { DataContext } from '../../context/DataContext'
-import { ProductsContextType } from '../../context/ProductsContext'
+import { ClaimContextType, DataContext } from '../../context/DataContext'
 import { ClaimType } from "../../types/claim"
 import claimService from "../../services/claimService"
 import { ToastContextType } from '../../context/ToastContext'
 
 const Claim = () => {
-    const { productClaim } = useContext(DataContext) as ProductsContextType
+    const { claimID } = useContext(DataContext) as ClaimContextType
     const [getClaimType, setClaimType] = useState('')
     const [getTextAreaContent, setTextAreaContent] = useState('')
     const { setMessage } = useContext(DataContext) as ToastContextType
 
     const claimToSend: ClaimType = {
-        productID: productClaim,
+        productID: claimID,
         type: getClaimType,
         textContent: getTextAreaContent
     }

@@ -3,15 +3,16 @@ import { FormCheck, FormControl, InputGroup } from 'react-bootstrap'
 import PurchaseSection from './PurchaseSection'
 import orderService from '../../services/orderService'
 import { OrderCash, Order, OrderCard, OrderCreditCard } from '../../types/order'
-import { DataContext } from '../../context/DataContext'
+import { CartContextType, DataContext } from '../../context/DataContext'
 import { CartProductContextType } from '../../types/cartProduct'
-import { ProductsContextType } from '../../context/ProductsContext'
 import { traducir } from '../extas/Traductor'
 import { ToastContextType } from '../../context/ToastContext'
+import { SessionContextType } from '../../context/SessionContext'
 
 const Purchase = () => {
   const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
-  const { discount } = useContext(DataContext) as ProductsContextType
+  const { total,discount } = useContext(DataContext) as CartContextType
+  const { username } = useContext(DataContext) as SessionContextType
   const { setMessage } = useContext(DataContext) as ToastContextType
   const [getBuyerName, setBuyerName] = useState('')
   const [getBusinessName, setBusinessName] = useState('')
@@ -32,6 +33,7 @@ const Purchase = () => {
   const concludePurchase = () => {
 
     const order: Order = {
+      username: username,
       buyerName: getBuyerName,
       businessName: getBusinessName,
       cuit: getCuit,
@@ -39,7 +41,8 @@ const Purchase = () => {
       isByHomeDelivery: isByHomeDelivery,
       deliveryAddress: getDeliveryAddress,
       products: Object.assign({}, ...Array.from(cartContext.entries()).map(([k, v]) => ({ [k]: v.quantity }))),
-      coupon: discount
+      discount: discount,
+      total: total
     }
 
     if (getPaymentType === 'Efectivo') {

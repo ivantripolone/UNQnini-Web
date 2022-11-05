@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../../context/DataContext'
 import { SessionContextType } from '../../context/SessionContext'
 import { LoginData } from '../../types/loginData'
-import { RecoverPasswordData } from '../../types/recoverPasswordData'
+import { Username } from '../../types/username'
 import { traducir } from '../extas/Traductor'
 import loginService from '../../services/loginService'
 import { useNavigate } from 'react-router-dom'
@@ -23,8 +23,8 @@ const Login = () => {
     password: getPassword,
   }
 
-  const recoverPasswordData: RecoverPasswordData = {
-    userName: getUserName,
+  const recoverPasswordData: Username = {
+    username: getUserName
   }
 
   const recoverPassword = () => {
