@@ -70,7 +70,7 @@ const Profile = () => {
   }, [navigate, username])
 
   return (
-    <div className='d-flex flex-row ProfilePage'>
+<div className='d-flex flex-row ProfilePage'>
       <Col>
         <div className='d-flex flex-column ProfileCard'>
           <Row> <img src={usericon} width='256' height='256' alt='' /> </Row>
