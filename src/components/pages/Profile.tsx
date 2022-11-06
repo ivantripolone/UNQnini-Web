@@ -73,7 +73,7 @@ const Profile = () => {
 <div className='d-flex flex-row ProfilePage'>
       <Col>
         <div className='d-flex flex-column ProfileCard'>
-          <Row> <img src={usericon} width='256' height='256' alt='' /> </Row>
+          <Row> <img src={getPictureUrl} onError={({ currentTarget }) => { currentTarget.onerror = null;  currentTarget.src=usericon; }} width='256' height='256' alt='' /> </Row>
           <Row> <h2 className='d-flex justify-content-center'>{getUserName}</h2> </Row>
         </div>
       </Col>

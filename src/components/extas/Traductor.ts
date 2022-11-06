@@ -22,8 +22,8 @@ export const traducir = (fieldName: string) => {
             return 'Direccion del comercio';
         case 'debe coincidir con \"^[a-zA-Z ]*$\"':
             return 'solo puede contener letras';
-        case 'debe coincidir con \"^\\d{10}$\"':
-            return 'no puede tener mas de 10 digitos';
+        case 'debe coincidir con \"^\\d{11}$\"':
+            return 'no puede tener mas de 11 digitos';
         default:
             return fieldName;
     }

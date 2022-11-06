@@ -75,7 +75,7 @@ const Purchase = () => {
   }
 
 
-  useEffect(() => setMessage('Bienvenido a la sección de pago, ingrese todos los datos solicitados.'))
+  useEffect(() => setMessage('Bienvenido a la sección de pago, ingrese todos los datos solicitados.'), [])
 
   return (
     <div className='PurchasePage'>
