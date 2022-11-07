@@ -22,21 +22,24 @@ const Claim = () => {
         claimService.postClaim(claimToSend)
         .then(() => { setMessage('Tu reclamo se envió correctamente') })
         .catch(() => { setMessage('Hubo un error al enviar su reclamo, pruebe mas tarde') })
+        setClaimType("Tipo de reclamo");
+        (document.getElementById("textAreaMessage") as HTMLTextAreaElement).value = '';
+        (document.getElementById("claimSelect") as HTMLSelectElement).value = 'Tipo de reclamo';
     }
 
     return (
       <div className='d-flex flex-column ProductTableContainer'>
         <b>Seleccione el tipo de reclamo:</b>
-        <select className="form-select" id="claimSelect" aria-label="Default select example" onChange={(event) => {setClaimType(event.target.value)}}>
+        <select className="form-select" id="claimSelect" defaultValue={"Tipo de reclamo"}  aria-label="Default select example" onChange={(event) => {setClaimType(event.target.value)}}>
             <option selected>Tipo de reclamo</option>
             <option value="Producto">Producto</option>
             <option value="Servicio">Servicio</option>
-            <option value="3">Otro</option>
+            <option value="Otro">Otro</option>
         </select>
         <b>Ingrese la información relacionada con el reclamo:</b>        
-        <textarea onChange={(event) => {setTextAreaContent(event.target.value)}}></textarea>
+        <textarea id="textAreaMessage" onChange={(event) => {setTextAreaContent(event.target.value)}}></textarea>
         <div className='registerButton'>
-        {(getClaimType !== '' && getTextAreaContent !== '')  ? 
+        {((getClaimType !== 'Tipo de reclamo'  && getClaimType !== '' ) && getTextAreaContent !== '')  ? 
             <button id='BotonRegistrarse' onClick={sendClaim}> <img src={Send_Button} alt='' /></button> :
             <button id='BotonPagarProductos'> <img alt='' src={Send_Disabled_Button} /> </button>
         }   
