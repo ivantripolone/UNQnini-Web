@@ -186,4 +186,22 @@ $theme-colors: (
     margin-bottom: 10px;
 }
 
+.ErrorBox {
+    display: flex;
+    align-content: center;
+    margin: 100px;
+    background-color: #ded4d4;
+}
+
+.ErrorPic {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.ErrorBody {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
 @import "~bootstrap/scss/bootstrap";
