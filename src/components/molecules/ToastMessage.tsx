@@ -26,10 +26,10 @@ const ToastMessage = () => {
         <div className="toast-container position-fixed bottom-0 end-0 p-3">
             <div className={`toast ${showFlag}`} role="alert" aria-live="assertive" aria-atomic="true">
                 <div className="toast-header">
-                    <strong className="me-auto">UNQNINI Adviser</strong>
+                    <h5 className="me-auto"><strong>UNQNINI Adviser</strong></h5>
                     <button type="button" className="btn-close" onClick={hideToast}></button>
                 </div>
-                <div className="toast-body">{text}</div>
+                <div className="toast-body"><h6>{text}</h6></div>
             </div>
         </div>
     )

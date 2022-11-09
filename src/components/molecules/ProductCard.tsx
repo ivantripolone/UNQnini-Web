@@ -13,16 +13,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
   }
 
   return (
-    <div className='CardContainer'>
+    <div className='CardContainer' onClick={handleClick}>
       <img
-        onClick={handleClick}
         src={product.pictureUrl}
         className='card-img-top'
         alt={`Producto ${product.name}`}
       />
       <div className='card-body'>
         <h5 className='card-title'>{product.name}</h5>
-        <p className='card-text'>Precio: ${product.price}</p>
+        <b className='card-text'>Precio: ${product.price}</b>
       </div>
     </div>
   )
