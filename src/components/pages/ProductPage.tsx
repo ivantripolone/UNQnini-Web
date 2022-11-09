@@ -4,6 +4,7 @@ import { DataContext } from '../../context/DataContext'
 import productsService from '../../services/productsService'
 import { Product } from '../../types/product'
 import { CartProduct, CartProductContextType } from '../../types/cartProduct'
+import Add_To_Cart_Button from '../../assets/Add_To_Cart_Button.png'
 
 const initialProduct = {
   id: '',
@@ -61,7 +62,7 @@ const ProductPage = () => {
 
         <button id='BotonAgregarAlCarrito' type='button' className='btn btn-primary btn-lg'
           onClick={() => saveProductInCart(productId!, product.name, quantitySelected, product.price, product.stock)}>
-          Agregar al carrito
+          <img src={Add_To_Cart_Button} alt='' width='80%' />
         </button>
 
         <ul>
