@@ -8,6 +8,7 @@ import { CartProductContextType } from '../../types/cartProduct'
 import { traducir } from '../extas/Traductor'
 import { ToastContextType } from '../../context/ToastContext'
 import { SessionContextType } from '../../context/SessionContext'
+import End_Purchase_Button from "../../assets/End_Purchase_Button.png"
 
 const Purchase = () => {
     const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
@@ -231,8 +232,15 @@ const Purchase = () => {
                             />
                         </div>
                     ) : null}
+                    <p></p>
+                    <button className="align-self-center bg-light d-flex flex-column"
+                        disabled={cartContext.size === 0}
+                        onClick={() => concludePurchase()} id='BotonPagarProductos'
+                        style={{ alignSelf: 'center' }}>
+                        <img src={End_Purchase_Button} alt='' />
+                    </button>
                 </PurchaseSection>
-                <button className="align-self-center bg-light d-flex flex-column" disabled={cartContext.size === 0} onClick={() => concludePurchase()} id='BotonPagar'>Finalizar Compra</button>
+
             </div>
         </div>
     )
