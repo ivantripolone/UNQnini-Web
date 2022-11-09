@@ -9,12 +9,18 @@ import { traducir } from '../extas/Traductor'
 import { ToastContextType } from '../../context/ToastContext'
 import { SessionContextType } from '../../context/SessionContext'
 import End_Purchase_Button from "../../assets/End_Purchase_Button.png"
+import { User } from '../../types/user'
+import userService from '../../services/userService'
 
 const Purchase = () => {
     const { cartContext, setCartContext } = useContext(DataContext) as CartProductContextType
     const { total, discount } = useContext(DataContext) as CartContextType
-    const { username } = useContext(DataContext) as SessionContextType
+    const { username, logueado } = useContext(DataContext) as SessionContextType
     const { setMessage } = useContext(DataContext) as ToastContextType
+    const [fullName, setUserFullName] = useState('')
+    const [cuit, setUserCuit] = useState('')
+    const [businessName, setUserBusinessName] = useState('')
+    const [businessAddress, setUserBusinessAddress] = useState('')
     const [getBuyerName, setBuyerName] = useState('')
     const [getBusinessName, setBusinessName] = useState('')
     const [getCuit, setCuit] = useState('')
@@ -76,7 +82,18 @@ const Purchase = () => {
     }
 
 
-    useEffect(() => setMessage('Bienvenido a la sección de pago, ingrese todos los datos solicitados.'), [])
+    useEffect(() => {
+        setMessage('Bienvenido a la sección de pago, ingrese todos los datos solicitados.')
+        if (logueado) {
+            userService.getUser(username)
+                .then((user: User) => {
+                    setUserFullName(user.fullname)
+                    setUserBusinessName(user.businessName)
+                    setUserBusinessAddress(user.businessAddress)
+                    setUserCuit(user.cuit)
+                })
+        }
+    }, [])
 
     return (
         <div className='PurchasePage'>
@@ -87,18 +104,22 @@ const Purchase = () => {
 
                         <FormControl style={{ width: '40%' }} type='text'
                             placeholder='Nombre y Apellido'
+                            value={fullName}
                             onChange={(event) => setBuyerName(event.target.value)}
                         />
                         <FormControl style={{ width: '40%' }} type='text'
                             placeholder='Nombre del comercio'
+                            value={businessName}
                             onChange={(event) => setBusinessName(event.target.value)}
                         />
                         <FormControl style={{ width: '40%' }} type='number'
                             placeholder='CUIT del comercio'
+                            value={cuit}
                             onChange={(event) => setCuit(event.target.value)}
                         />
                         <FormControl style={{ width: '40%' }} type='text'
                             placeholder='Dirección del comercio'
+                            value={businessAddress}
                             onChange={(event) => setBusinessAddress(event.target.value)}
                         />
                     </div>
