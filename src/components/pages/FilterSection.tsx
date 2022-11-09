@@ -45,7 +45,7 @@ const FilterSection = () => {
   }, [allProducts, setProducts, selectedLicence, selectedCategory, selectedYear, selectedSearch, selectedSort])
 
   return (
-    <div className='m-3 d-flex flex-column bg-nav'>
+    <div className='m-3 d-flex flex-column bg-nav filterContainer'>
       <div className='d-flex flex-row justify-content-around gap-3 p-2'>
         <Filter
           selected={selectedLicence}
