@@ -24,6 +24,7 @@ export const DataProvider = ({ children }: Props) => {
   const [getErrorMessagesForProducts, setErrorMessagesForProducts] = useState('')
   const [logueado, setLogueado] = useState(false)
   const [username, setUsername] = useState(null)
+  const [showActionButtons, setShowActionButtons] = useState(true)
   const [message, setMessage] = useState('')
   const [total, setTotal] = useState('')
   const [discount, setDiscount] = useState('')
@@ -47,7 +48,9 @@ export const DataProvider = ({ children }: Props) => {
         discount,
         setDiscount,
         claimID,
-        setClaimID
+        setClaimID, 
+        showActionButtons, 
+        setShowActionButtons
       }}
     >
       {children}

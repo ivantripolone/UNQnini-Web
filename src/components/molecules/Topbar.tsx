@@ -10,22 +10,25 @@ import { ToastContextType } from '../../context/ToastContext'
 
 const Topbar = () => {
   const navigate = useNavigate()
-  const { logueado, setLogueado } = useContext(DataContext) as SessionContextType
+  const { logueado, setLogueado, showActionButtons, setShowActionButtons } = useContext(DataContext) as SessionContextType
   const { setMessage } = useContext(DataContext) as ToastContextType
 
   const handleClick = () => {
     setMessage('')
     navigate('/')
+    setShowActionButtons(true)
   }
 
   const handleCartClick = () => {
     setMessage('Bienvenido al carrito de compras, aqui vera todos sus productos seleccionados')
     navigate('/cart')
+    setShowActionButtons(true)
   }
 
   const login = () => {
     setMessage('')
     navigate('/login')
+    setShowActionButtons(false)
   }
 
   const logout = () => {
@@ -37,11 +40,13 @@ const Topbar = () => {
   const register = () => {
     setMessage('')
     navigate('/register')
+    setShowActionButtons(false)
   }
 
   const profile = () => {
     setMessage('')
     navigate('/profile')
+    setShowActionButtons(true)
   }
 
   return (
@@ -61,6 +66,7 @@ const Topbar = () => {
           </Navbar.Brand>
         </Navbar.Collapse>
         <Navbar.Collapse className='justify-content-end'>
+        {showActionButtons &&
           <img
             onClick={handleCartClick}
             src={carrito}
@@ -68,8 +74,9 @@ const Topbar = () => {
             height='30'
             alt='cart'
             style={{ cursor: 'pointer' }}
-          />
+          />}
         </Navbar.Collapse>
+        {showActionButtons && 
         <DropdownButton title={<img src={usericon} width='30' height='30' />}>
           {logueado
             ?
@@ -84,6 +91,7 @@ const Topbar = () => {
             </div>
           }
         </DropdownButton>
+        }
       </Container>
     </Navbar>
   )
