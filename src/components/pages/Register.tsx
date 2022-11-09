@@ -11,7 +11,7 @@ import { traducir } from '../extas/Traductor'
 
 const Register = () => {
 
-    const { logueado, setLogueado, setUsername } = useContext(DataContext) as SessionContextType
+    const { logueado, setLogueado, setUsername, setShowActionButtons } = useContext(DataContext) as SessionContextType
     const { setMessage } = useContext(DataContext) as ToastContextType
     const navigate = useNavigate()
     const [username, setUsernameField] = useState('')
@@ -21,6 +21,8 @@ const Register = () => {
     const [businessName, setBusinessName] = useState('')
     const [businessAddress, setBusinessAddress] = useState('')
     const [pictureUrl, setPictureUrl] = useState('')
+
+    setShowActionButtons(false);
 
     const registerData: User = {
         username: username,
@@ -37,7 +39,6 @@ const Register = () => {
             .then(() => {
                 setLogueado(true)
                 setUsername(username)
-
                 setMessage('')
                 navigate('/')
             })
@@ -53,7 +54,7 @@ const Register = () => {
     }
 
     useEffect(() => { if (logueado) navigate('/') })
-
+    
     return (
         <div className='d-flex flex-column registerContainer'>
             <div className='registerFields'>

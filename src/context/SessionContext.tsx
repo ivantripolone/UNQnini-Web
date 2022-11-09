@@ -6,6 +6,8 @@ export type SessionContextType = {
   setLogueado: React.Dispatch<React.SetStateAction<boolean>>
   username: string
   setUsername: React.Dispatch<React.SetStateAction<string>>
+  showActionButtons: boolean
+  setShowActionButtons: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const SessionContext = createContext<SessionContextType>({} as SessionContextType)
@@ -17,9 +19,10 @@ interface SessionProviderProps {
 export const ProductsProvider = ({ children }: SessionProviderProps) => {
   const [logueado, setLogueado] = useState(false)
   const [username, setUsername] = useState('')
+  const [showActionButtons, setShowActionButtons] = useState(true)
 
   return (
-    <SessionContext.Provider value={{ logueado, setLogueado, username, setUsername }}>
+    <SessionContext.Provider value={{ logueado, setLogueado, username, setUsername, showActionButtons, setShowActionButtons }}>
       {children}
     </SessionContext.Provider>
   )
