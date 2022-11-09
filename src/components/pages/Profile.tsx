@@ -70,10 +70,10 @@ const Profile = () => {
   }, [navigate, username])
 
   return (
-<div className='d-flex flex-row ProfilePage'>
+    <div className='d-flex flex-row ProfilePage'>
       <Col>
         <div className='d-flex flex-column ProfileCard'>
-          <Row> <img src={getPictureUrl} onError={({ currentTarget }) => { currentTarget.onerror = null;  currentTarget.src=usericon; }} width='256' height='256' alt='' /> </Row>
+          <Row> <img src={getPictureUrl} onError={({ currentTarget }) => { currentTarget.onerror = null; currentTarget.src = usericon; }} width='256' height='256' alt='' /> </Row>
           <Row> <h2 className='d-flex justify-content-center'>{getUserName}</h2> </Row>
         </div>
       </Col>
@@ -115,6 +115,15 @@ const Profile = () => {
               disabled={!modificando}
               onChange={(event) => setPassword(event.target.value)}
             />
+            {modificando ?
+              <div>
+                <b>Imagen de Perfil:</b>
+                <FormControl type='text'
+                  value={getPictureUrl}
+                  onChange={(event) => setPictureUrl(event.target.value)}
+                />
+              </div>
+              : null}
           </Row>
         </div>
       </Col>
