@@ -12,7 +12,7 @@ import { ToastContextType } from '../../context/ToastContext'
 import { Username } from '../../types/username'
 
 const Login = () => {
-  const { setLogueado, setUsername } = useContext(DataContext) as SessionContextType
+  const { setLogueado, setUsername, setShowActionButtons } = useContext(DataContext) as SessionContextType
   const { setMessage } = useContext(DataContext) as ToastContextType
   const [getUserName, setUserName] = useState('')
   const [getPassword, setPassword] = useState('')
@@ -42,6 +42,7 @@ const Login = () => {
     loginService
       .postLogin(loginData)
       .then((response: { data: { areTheUserDetailsCorrect: boolean } }) => {
+        setShowActionButtons(true)
         setLogueado(response.data.areTheUserDetailsCorrect)
         setUsername(getUserName)
         setMessage('')
