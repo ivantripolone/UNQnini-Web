@@ -17,10 +17,6 @@ const Purchase = () => {
     const { total, discount } = useContext(DataContext) as CartContextType
     const { username, logueado } = useContext(DataContext) as SessionContextType
     const { setMessage } = useContext(DataContext) as ToastContextType
-    const [fullName, setUserFullName] = useState('')
-    const [cuit, setUserCuit] = useState('')
-    const [businessName, setUserBusinessName] = useState('')
-    const [businessAddress, setUserBusinessAddress] = useState('')
     const [getBuyerName, setBuyerName] = useState('')
     const [getBusinessName, setBusinessName] = useState('')
     const [getCuit, setCuit] = useState('')
@@ -38,7 +34,6 @@ const Purchase = () => {
     const [getCardExpirationYear, setCardExpirationYear] = useState('')
 
     const concludePurchase = () => {
-
         const order: Order = {
             username: username,
             buyerName: getBuyerName,
@@ -87,10 +82,10 @@ const Purchase = () => {
         if (logueado) {
             userService.getUser(username)
                 .then((user: User) => {
-                    setUserFullName(user.fullname)
-                    setUserBusinessName(user.businessName)
-                    setUserBusinessAddress(user.businessAddress)
-                    setUserCuit(user.cuit)
+                    setBuyerName(user.fullname)
+                    setBusinessName(user.businessName)
+                    setBusinessAddress(user.businessAddress)
+                    setCuit(user.cuit)
                 })
         }
     }, [])
@@ -104,22 +99,22 @@ const Purchase = () => {
 
                         <FormControl style={{ width: '40%' }} type='text'
                             placeholder='Nombre y Apellido'
-                            value={fullName}
+                            value={getBuyerName}
                             onChange={(event) => setBuyerName(event.target.value)}
                         />
                         <FormControl style={{ width: '40%' }} type='text'
                             placeholder='Nombre del comercio'
-                            value={businessName}
+                            value={getBusinessName}
                             onChange={(event) => setBusinessName(event.target.value)}
                         />
                         <FormControl style={{ width: '40%' }} type='number'
                             placeholder='CUIT del comercio'
-                            value={cuit}
+                            value={getCuit}
                             onChange={(event) => setCuit(event.target.value)}
                         />
                         <FormControl style={{ width: '40%' }} type='text'
                             placeholder='Dirección del comercio'
-                            value={businessAddress}
+                            value={getBusinessAddress}
                             onChange={(event) => setBusinessAddress(event.target.value)}
                         />
                     </div>
